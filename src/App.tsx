@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { DashboardView } from './components/DashboardView';
 import { PhishingDemoModule } from './components/PhishingDemoModule';
+import { SocDashboardView } from './components/SocDashboardView';
 import { ComingSoonModule } from './components/ComingSoonModule';
 import { LandingPageView } from './components/LandingPageView';
 import { QuickCopilotModal } from './components/QuickCopilotModal';
@@ -114,7 +115,15 @@ export const App: React.FC = () => {
             />
           )}
 
-          {!isLandingView && currentModule !== 'dashboard' && currentModule !== 'phishing' && (
+          {!isLandingView && currentModule === 'soc' && (
+            <SocDashboardView
+              stats={stats}
+              onBackToDashboard={() => setCurrentModule('dashboard')}
+              onUpdateStats={handleUpdateStats}
+            />
+          )}
+
+          {!isLandingView && currentModule !== 'dashboard' && currentModule !== 'phishing' && currentModule !== 'soc' && (
             <ComingSoonModule
               moduleId={currentModule}
               onNavigateToModule={(id) => setCurrentModule(id)}
