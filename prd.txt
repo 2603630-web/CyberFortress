@@ -1,0 +1,1447 @@
+Absolutely. Below is a **detailed PRD (Product Requirements Document)** for **CyberFortress**, written in a way that you can use for your university project documentation, group meeting, or development planning.
+
+# CyberFortress — Product Requirements Document (PRD)
+
+**Project Name:** CyberFortress  
+**Project Type:** Interactive Cybersecurity Learning Platform  
+**Version:** 1.0  
+**Target Users:** Students, beginners, and general users interested in cybersecurity  
+**Platform:** Web Application  
+**Frontend:** HTML, CSS, JavaScript  
+**Backend:** Python + Flask  
+**Database:** SQLite  
+**Charts:** Chart.js  
+**Version Control:** Git + GitHub  
+
+---
+
+## 1. Product Overview
+
+### 1.1 Product Description
+
+CyberFortress is an interactive web-based cybersecurity learning platform designed to help beginners understand common cybersecurity threats and basic security practices.
+
+Unlike a traditional educational website that only provides text-based information, CyberFortress allows users to **interact with cybersecurity concepts through simulations, quizzes, security checks, challenges, and visual dashboards**.
+
+The platform follows a simple learning cycle:
+
+> **Learn → Try → Answer → Get Feedback → Earn Points**
+
+The main purpose is to make cybersecurity education more **interactive, practical, understandable, and engaging**.
+
+---
+
+# 2. Problem Statement
+
+Many beginners learn cybersecurity through theoretical material such as articles, slides, and lectures.
+
+The problem with this approach is that users may understand the definition of an attack but may not know how to recognize or respond to it in a realistic situation.
+
+For example, a user may know what phishing is but still click on a suspicious email.
+
+CyberFortress addresses this problem by allowing users to interact with simplified cybersecurity scenarios.
+
+### Problems CyberFortress aims to solve
+
+- Lack of practical cybersecurity learning for beginners.
+- Difficulty identifying phishing attacks.
+- Lack of understanding of password security.
+- Limited understanding of MFA.
+- Difficulty understanding how security monitoring works.
+- Lack of beginner-friendly cybersecurity challenges.
+- Cybersecurity concepts can appear complicated to new learners.
+
+---
+
+# 3. Product Goals
+
+The primary goals of CyberFortress are:
+
+### Goal 1 — Cybersecurity Education
+
+Teach users basic cybersecurity concepts in simple language.
+
+### Goal 2 — Interactive Learning
+
+Allow users to interact with cybersecurity simulations instead of only reading information.
+
+### Goal 3 — Practical Awareness
+
+Help users recognize common security threats.
+
+### Goal 4 — Gamification
+
+Use points, scores, challenges, and feedback to make learning engaging.
+
+### Goal 5 — Security Monitoring Demonstration
+
+Provide a simplified demonstration of how a SOC monitors security events.
+
+### Goal 6 — Beginner-Friendly Experience
+
+Ensure that users without advanced cybersecurity knowledge can use the platform.
+
+---
+
+# 4. Target Users
+
+## 4.1 Primary Users
+
+### Beginner Cybersecurity Students
+
+Students who are studying basic cybersecurity concepts.
+
+They can use CyberFortress to:
+
+- Learn concepts.
+- Practice identifying attacks.
+- Complete CTF challenges.
+- Test their knowledge.
+- Monitor their progress.
+
+---
+
+## 4.2 Secondary Users
+
+### General Internet Users
+
+People who want to improve their basic online security awareness.
+
+For example, they can learn:
+
+- How to identify phishing.
+- Why strong passwords matter.
+- Why MFA is useful.
+- How suspicious login activity can be detected.
+
+---
+
+## 4.3 Instructor / Teacher
+
+An instructor could potentially use the platform to demonstrate cybersecurity concepts during a class.
+
+---
+
+# 5. User Roles
+
+The first version can have two primary roles.
+
+| Role | Description |
+|---|---|
+| User | Completes simulations, quizzes and challenges |
+| Admin | Manages challenges, simulated alerts and platform content |
+
+For a first-semester project, the **admin role can remain simple**.
+
+---
+
+# 6. Core Features
+
+CyberFortress will contain six major interactive modules.
+
+1. Phishing Awareness Simulator
+2. Attack & Defense Simulator
+3. Password Security Checker
+4. MFA Demonstration
+5. Mini SOC Dashboard
+6. CyberFortress CTF Challenges
+
+---
+
+# 7. Feature 1 — Phishing Awareness Simulator
+
+## 7.1 Purpose
+
+Teach users how to identify suspicious emails and phishing attempts.
+
+---
+
+## 7.2 User Flow
+
+The user opens the phishing simulator.
+
+The website displays a sample email.
+
+Example:
+
+> **From:** security@example-login.com  
+> **Subject:** Your account will be deleted!
+
+The user receives two options:
+
+- **Safe**
+- **Suspicious**
+
+The user selects an answer.
+
+The system then provides feedback.
+
+---
+
+## 7.3 Example Suspicious Indicators
+
+The simulator may highlight:
+
+- Suspicious sender address.
+- Urgent language.
+- Unknown links.
+- Requests for passwords.
+- Spelling mistakes.
+- Fake security warnings.
+- Unusual attachments.
+
+---
+
+## 7.4 Functional Requirements
+
+**FR-PH-01:** The system shall display sample emails.
+
+**FR-PH-02:** The system shall allow users to classify an email.
+
+**FR-PH-03:** The system shall determine whether the answer is correct.
+
+**FR-PH-04:** The system shall display an explanation after the answer.
+
+**FR-PH-05:** The system shall award points for correct answers.
+
+**FR-PH-06:** The system shall record the user's result.
+
+---
+
+## 7.5 Example Feedback
+
+If the user chooses **Suspicious**:
+
+> Correct! The email contains several phishing indicators, including an unusual sender address and urgent language.
+
+If the user chooses incorrectly:
+
+> Not quite. Look carefully at the sender address and the request for account information.
+
+---
+
+# 8. Feature 2 — Attack & Defense Simulator
+
+## 8.1 Purpose
+
+Demonstrate how a basic cyber attack can be detected and mitigated.
+
+This feature will use **completely simulated attacks** and will not perform real attacks against external systems.
+
+---
+
+## 8.2 Basic Flow
+
+```text
+Attacker
+   ↓
+Target
+   ↓
+Security Monitoring
+   ↓
+Detection
+   ↓
+Defense
+   ↓
+Attack Blocked
+```
+
+---
+
+## 8.3 Example Scenario
+
+### Scenario: Multiple Failed Login Attempts
+
+The simulator displays:
+
+```text
+Attempt 1 → Failed
+Attempt 2 → Failed
+Attempt 3 → Failed
+Attempt 4 → Suspicious
+Attempt 5 → ALERT
+```
+
+The system detects unusual activity.
+
+The user can then select a defense:
+
+- Block IP
+- Enable MFA
+- Monitor activity
+- Ignore
+
+The system explains the result.
+
+---
+
+## 8.4 Functional Requirements
+
+**FR-AD-01:** The system shall display a simulated attack scenario.
+
+**FR-AD-02:** The system shall show attack steps sequentially.
+
+**FR-AD-03:** The system shall display security detection.
+
+**FR-AD-04:** The user shall select a defensive action.
+
+**FR-AD-05:** The system shall show the result of the selected defense.
+
+**FR-AD-06:** The system shall provide an explanation.
+
+---
+
+# 9. Feature 3 — Password Security Checker
+
+## 9.1 Purpose
+
+Teach users about password strength.
+
+The system should clearly warn:
+
+> **Do not enter your real password. Use a sample password for this demonstration.**
+
+---
+
+## 9.2 Password Analysis
+
+The system can check:
+
+- Password length.
+- Uppercase letters.
+- Lowercase letters.
+- Numbers.
+- Special characters.
+- Common/simple patterns.
+
+---
+
+## 9.3 Example
+
+User enters:
+
+```text
+password123
+```
+
+System displays:
+
+```text
+Strength: Weak
+
+Problems:
+✓ Too common
+✓ Easy to guess
+✓ Could be stronger
+
+Suggestion:
+Use a longer and more unique password.
+```
+
+---
+
+## 9.4 Strong Example
+
+```text
+River!Cloud7-Mango
+```
+
+Possible result:
+
+```text
+Strength: Strong
+
+✓ Good length
+✓ Contains different character types
+✓ More difficult to guess
+```
+
+The checker should avoid claiming that a password is absolutely "unbreakable."
+
+---
+
+## 9.5 Functional Requirements
+
+**FR-PS-01:** The system shall provide a password input field.
+
+**FR-PS-02:** The system shall warn users not to enter real passwords.
+
+**FR-PS-03:** The system shall analyze the sample password locally where possible.
+
+**FR-PS-04:** The system shall display password-strength feedback.
+
+**FR-PS-05:** The system shall identify common weaknesses.
+
+**FR-PS-06:** The system shall provide improvement suggestions.
+
+---
+
+# 10. Feature 4 — MFA Demonstration
+
+## 10.1 Purpose
+
+Demonstrate how Multi-Factor Authentication protects accounts.
+
+---
+
+## 10.2 Basic Process
+
+```text
+Enter Password
+      ↓
+Password Correct
+      ↓
+Verification Code
+      ↓
+Code Correct?
+   ↙       ↘
+ Yes       No
+ ↓          ↓
+Access     Access
+Granted    Denied
+```
+
+---
+
+## 10.3 Simulation
+
+The website displays:
+
+```text
+Step 1
+Enter Password
+
+        ↓
+
+Step 2
+Enter Verification Code
+
+        ↓
+
+Access Granted
+```
+
+The verification code can be generated by the application for demonstration purposes.
+
+It should **not connect to a real authentication service**.
+
+---
+
+## 10.4 Functional Requirements
+
+**FR-MFA-01:** The system shall demonstrate password authentication.
+
+**FR-MFA-02:** The system shall demonstrate a second verification step.
+
+**FR-MFA-03:** The system shall simulate successful verification.
+
+**FR-MFA-04:** The system shall simulate failed verification.
+
+**FR-MFA-05:** The system shall explain why MFA provides additional protection.
+
+---
+
+# 11. Feature 5 — Mini SOC Dashboard
+
+## 11.1 Purpose
+
+Demonstrate how a Security Operations Center can monitor security events.
+
+The dashboard will use **simulated security events**.
+
+---
+
+## 11.2 Dashboard Components
+
+The dashboard can contain:
+
+### Total Alerts
+
+```text
+Total Alerts: 48
+```
+
+### Critical Alerts
+
+```text
+Critical: 5
+```
+
+### Medium Alerts
+
+```text
+Medium: 18
+```
+
+### Low Alerts
+
+```text
+Low: 25
+```
+
+---
+
+## 11.3 Security Alert Table
+
+| Time | Event | Severity | Status |
+|---|---|---|---|
+| 09:15 | Failed Login | Medium | Investigating |
+| 09:22 | Suspicious Email | High | Detected |
+| 09:30 | MFA Failure | Medium | Resolved |
+| 09:42 | Multiple Login Attempts | High | Blocked |
+
+---
+
+## 11.4 Charts
+
+Chart.js can be used for:
+
+### Alert Distribution
+
+```text
+Low       █████████████
+Medium    █████████
+High      █████
+Critical  ██
+```
+
+### Alerts Over Time
+
+A line chart can show the number of simulated alerts over different times.
+
+---
+
+## 11.5 Functional Requirements
+
+**FR-SOC-01:** The system shall display simulated security events.
+
+**FR-SOC-02:** The system shall categorize events by severity.
+
+**FR-SOC-03:** The system shall display alerts in a table.
+
+**FR-SOC-04:** The dashboard shall display statistics.
+
+**FR-SOC-05:** The dashboard shall display charts using Chart.js.
+
+**FR-SOC-06:** Alert data shall be retrieved from SQLite through Flask.
+
+---
+
+# 12. Feature 6 — CyberFortress CTF
+
+## 12.1 Purpose
+
+Provide small beginner-friendly cybersecurity challenges.
+
+The CTF should focus on **safe educational challenges**, not real-world exploitation.
+
+---
+
+## 12.2 Challenge Categories
+
+### Challenge 1 — Phishing Detection
+
+User identifies suspicious parts of an email.
+
+### Challenge 2 — Simple Encoding
+
+User decodes a simple educational encoded message.
+
+Example:
+
+```text
+SGVsbG8=
+```
+
+The expected learning objective is understanding basic encoding concepts.
+
+### Challenge 3 — Log Analysis
+
+User receives:
+
+```text
+09:01 Login successful
+09:04 Login failed
+09:05 Login failed
+09:06 Login failed
+09:07 Login failed
+```
+
+Question:
+
+> What looks suspicious?
+
+### Challenge 4 — Cybersecurity Quiz
+
+Example:
+
+> Which technology provides an additional authentication factor?
+
+A. HTTP  
+B. MFA  
+C. DNS  
+D. FTP
+
+Correct answer:
+
+**B. MFA**
+
+---
+
+## 12.3 Points
+
+Example scoring system:
+
+| Activity | Points |
+|---|---:|
+| Correct quiz answer | +10 |
+| Phishing challenge | +20 |
+| Attack-defense simulation | +20 |
+| MFA challenge | +10 |
+| CTF challenge | +25 |
+
+---
+
+# 13. Gamification System
+
+CyberFortress will use points to encourage users to continue learning.
+
+## User Score
+
+Example:
+
+```text
+Username: Student01
+
+Total Points: 180
+
+Challenges Completed: 12
+
+Correct Answers: 17/20
+```
+
+---
+
+## Possible Levels
+
+| Level | Points |
+|---|---:|
+| Cyber Beginner | 0–99 |
+| Security Learner | 100–249 |
+| Cyber Defender | 250–499 |
+| Security Expert | 500+ |
+
+These names can be changed later.
+
+---
+
+# 14. User Dashboard
+
+After logging in, the user can see:
+
+```text
+Welcome to CyberFortress
+
+Points: 180
+Level: Cyber Defender
+
+Progress
+████████████░░░ 80%
+
+Modules Completed:
+✓ Phishing
+✓ Password Security
+✓ MFA
+✓ Attack Defense
+
+Remaining:
+□ SOC Challenge
+□ CTF Challenge
+```
+
+---
+
+# 15. Website Pages
+
+A possible website structure is:
+
+```text
+CyberFortress
+│
+├── Home
+├── Learn
+│   ├── Phishing
+│   ├── Password Security
+│   ├── MFA
+│   └── Cyber Attacks
+│
+├── Simulations
+│   ├── Phishing Simulator
+│   ├── Attack & Defense
+│   └── MFA Demo
+│
+├── Password Checker
+│
+├── SOC Dashboard
+│
+├── CTF Challenges
+│
+├── Leaderboard
+│
+└── User Dashboard
+```
+
+---
+
+# 16. Home Page Requirements
+
+The home page should immediately explain the purpose of CyberFortress.
+
+### Hero Section
+
+```text
+CYBERFORTRESS
+
+Learn Cybersecurity.
+Practice Security.
+Become a Defender.
+
+[Start Learning]
+[Try a Challenge]
+```
+
+---
+
+## Main Feature Cards
+
+Six cards should introduce:
+
+- Phishing Simulator
+- Attack & Defense
+- Password Checker
+- MFA Demo
+- SOC Dashboard
+- CTF Challenges
+
+---
+
+# 17. Backend Requirements
+
+The backend will be developed using **Python Flask**.
+
+Flask will handle:
+
+- User requests.
+- Quiz submissions.
+- Challenge validation.
+- Score calculations.
+- Database communication.
+- SOC data.
+- Simulation results.
+
+---
+
+# 18. Database Requirements
+
+SQLite will be used because it is lightweight and suitable for a first-semester project.
+
+### Possible Tables
+
+## Users
+
+| Field | Type |
+|---|---|
+| id | INTEGER |
+| username | TEXT |
+| password_hash | TEXT |
+| points | INTEGER |
+| created_at | DATETIME |
+
+Passwords should **never be stored as plain text**.
+
+---
+
+## Challenges
+
+| Field | Type |
+|---|---|
+| id | INTEGER |
+| title | TEXT |
+| description | TEXT |
+| category | TEXT |
+| points | INTEGER |
+| answer | TEXT |
+
+---
+
+## User Results
+
+| Field | Type |
+|---|---|
+| id | INTEGER |
+| user_id | INTEGER |
+| challenge_id | INTEGER |
+| score | INTEGER |
+| completed_at | DATETIME |
+
+---
+
+## Security Events
+
+| Field | Type |
+|---|---|
+| id | INTEGER |
+| event_type | TEXT |
+| severity | TEXT |
+| description | TEXT |
+| status | TEXT |
+| timestamp | DATETIME |
+
+---
+
+# 19. API Requirements
+
+Flask can provide simple API endpoints.
+
+Example:
+
+```text
+GET /api/alerts
+```
+
+Returns simulated SOC alerts.
+
+```text
+POST /api/challenge/submit
+```
+
+Submits a challenge answer.
+
+```text
+GET /api/user/score
+```
+
+Returns the user's score.
+
+```text
+GET /api/dashboard
+```
+
+Returns dashboard statistics.
+
+---
+
+# 20. Frontend Requirements
+
+The frontend will use:
+
+### HTML
+
+For page structure.
+
+### CSS
+
+For:
+
+- Layout.
+- Colors.
+- Buttons.
+- Cards.
+- Dashboard.
+- Responsive design.
+
+### JavaScript
+
+For:
+
+- User interaction.
+- Quiz logic.
+- Simulations.
+- Dynamic feedback.
+- API requests.
+- Updating charts.
+
+---
+
+# 21. UI/UX Requirements
+
+CyberFortress should have a professional cybersecurity theme.
+
+### Design Style
+
+Recommended style:
+
+- Dark background.
+- Clear text.
+- Security-themed icons.
+- Dashboard cards.
+- Simple animations.
+- Clear buttons.
+
+However, the design should remain readable and not become overly complicated.
+
+---
+
+# 22. Navigation
+
+The main navigation bar can contain:
+
+```text
+CyberFortress
+
+Home
+Learn
+Simulations
+Password Checker
+SOC Dashboard
+CTF
+Leaderboard
+
+[Login]
+```
+
+After login:
+
+```text
+Dashboard
+Profile
+Logout
+```
+
+---
+
+# 23. Security Requirements
+
+Because CyberFortress itself is a cybersecurity project, the application should demonstrate good security practices.
+
+### Requirement 1 — Password Protection
+
+User passwords must be hashed before being stored.
+
+### Requirement 2 — Input Validation
+
+User inputs should be validated on the backend.
+
+### Requirement 3 — No Real Credentials
+
+The application must clearly tell users not to enter real passwords or sensitive information.
+
+### Requirement 4 — Safe Simulations
+
+All attacks should be simulated.
+
+CyberFortress must not perform actual attacks against external systems.
+
+### Requirement 5 — No Real Personal Data
+
+The project should avoid collecting unnecessary personal information.
+
+### Requirement 6 — Authentication Security
+
+Sessions should be handled securely.
+
+### Requirement 7 — Error Handling
+
+The application should not expose sensitive backend errors to users.
+
+---
+
+# 24. Privacy Requirements
+
+CyberFortress should follow a minimal-data principle.
+
+The system should only collect information required for the project.
+
+For example:
+
+```text
+Username
+Password Hash
+Score
+Challenge Results
+```
+
+The system should not ask users for:
+
+- Real passwords.
+- Bank information.
+- Private messages.
+- Unnecessary personal information.
+
+---
+
+# 25. Ethical Requirements
+
+The project must clearly state that simulations are educational.
+
+A possible disclaimer:
+
+> **CyberFortress is an educational platform. All cybersecurity attacks and security events shown in this application are simulated for learning purposes. Do not use the techniques demonstrated here against systems without authorization.**
+
+---
+
+# 26. Non-Functional Requirements
+
+## Performance
+
+Pages should load quickly on normal computers and mobile devices.
+
+## Usability
+
+A beginner should be able to understand the interface without technical knowledge.
+
+## Reliability
+
+The system should not lose user scores during normal operation.
+
+## Maintainability
+
+The code should be organized into separate frontend, backend, and database components.
+
+## Scalability
+
+The project should be structured so additional challenges can be added later.
+
+## Compatibility
+
+The website should work on modern browsers such as:
+
+- Chrome
+- Edge
+- Firefox
+
+---
+
+# 27. System Architecture
+
+The overall architecture will be:
+
+```text
+                    ┌──────────────────┐
+                    │      USER        │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │   FRONTEND       │
+                    │ HTML/CSS/JS      │
+                    └────────┬─────────┘
+                             │
+                       HTTP Requests
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │   FLASK SERVER   │
+                    │     Python       │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │     SQLite       │
+                    │    Database      │
+                    └──────────────────┘
+
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │    Chart.js      │
+                    │  SOC Dashboard   │
+                    └──────────────────┘
+```
+
+---
+
+# 28. Suggested Project Structure
+
+```text
+CyberFortress/
+│
+├── app.py
+├── requirements.txt
+│
+├── database/
+│   └── cyberFortress.db
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── phishing.html
+│   ├── attack_defense.html
+│   ├── password.html
+│   ├── mfa.html
+│   ├── soc.html
+│   ├── ctf.html
+│   └── leaderboard.html
+│
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── phishing.js
+│   │   ├── simulation.js
+│   │   ├── password.js
+│   │   ├── mfa.js
+│   │   └── soc.js
+│   │
+│   └── images/
+│
+└── README.md
+```
+
+---
+
+# 29. User Journey
+
+A typical user journey:
+
+```text
+Visit CyberFortress
+       ↓
+Create Account / Login
+       ↓
+User Dashboard
+       ↓
+Learn Basic Concepts
+       ↓
+Try Phishing Simulator
+       ↓
+Try Attack & Defense
+       ↓
+Check Sample Password
+       ↓
+Try MFA Demonstration
+       ↓
+Explore SOC Dashboard
+       ↓
+Complete CTF Challenges
+       ↓
+Earn Points
+       ↓
+View Leaderboard
+```
+
+---
+
+# 30. Example User Story
+
+### User Story — Phishing
+
+> As a beginner, I want to practice identifying phishing emails so that I can recognize suspicious emails in real life.
+
+### Acceptance Criteria
+
+- User can see a sample email.
+- User can select Safe or Suspicious.
+- System checks the answer.
+- System provides an explanation.
+- Correct answers increase the user's score.
+- Result is recorded.
+
+---
+
+# 31. Example User Story — Password Checker
+
+> As a beginner, I want to check the strength of a sample password so that I can understand what makes a password stronger.
+
+### Acceptance Criteria
+
+- User sees a warning not to enter their real password.
+- User enters a sample password.
+- System analyzes it.
+- System displays weaknesses.
+- System provides suggestions.
+
+---
+
+# 32. Example User Story — SOC Dashboard
+
+> As a cybersecurity student, I want to view simulated security alerts so that I can understand the basic purpose of a SOC.
+
+### Acceptance Criteria
+
+- Dashboard displays security events.
+- Events have severity levels.
+- Events have timestamps.
+- Events have statuses.
+- Charts display alert statistics.
+- Data comes from the database.
+
+---
+
+# 33. Leaderboard
+
+A leaderboard can make the platform more engaging.
+
+Example:
+
+| Rank | Username | Points |
+|---:|---|---:|
+| 1 | CyberStudent | 560 |
+| 2 | SecurityPro | 510 |
+| 3 | Defender01 | 475 |
+| 4 | Student02 | 390 |
+
+For privacy, the project can use usernames rather than real names.
+
+---
+
+# 34. Admin Panel
+
+A simple admin panel can allow administrators to:
+
+- Add challenges.
+- Edit challenges.
+- Delete challenges.
+- View users.
+- View scores.
+- View simulated security events.
+- Add simulated alerts.
+- View platform statistics.
+
+Example:
+
+```text
+ADMIN DASHBOARD
+
+Users: 120
+Challenges: 25
+Completed Challenges: 840
+Total Alerts: 340
+
+[Manage Users]
+[Manage Challenges]
+[Manage Alerts]
+[View Statistics]
+```
+
+---
+
+# 35. Development Phases
+
+## Phase 1 — Planning
+
+- Finalize requirements.
+- Design database.
+- Create wireframes.
+- Divide team responsibilities.
+- Create GitHub repository.
+
+---
+
+## Phase 2 — Basic Website
+
+Develop:
+
+- Home page.
+- Navigation.
+- Login.
+- User dashboard.
+- Basic CSS design.
+
+---
+
+## Phase 3 — Backend
+
+Develop:
+
+- Flask application.
+- SQLite database.
+- User management.
+- Score system.
+- API routes.
+
+---
+
+## Phase 4 — Cybersecurity Features
+
+Implement:
+
+1. Phishing simulator.
+2. Attack-defense simulator.
+3. Password checker.
+4. MFA demonstration.
+5. SOC dashboard.
+6. CTF challenges.
+
+---
+
+## Phase 5 — Gamification
+
+Implement:
+
+- Points.
+- Levels.
+- Leaderboard.
+- Progress tracking.
+
+---
+
+## Phase 6 — Testing
+
+Test:
+
+- Login.
+- Database.
+- Quiz answers.
+- Score calculations.
+- Simulations.
+- Charts.
+- Mobile layout.
+- Invalid inputs.
+
+---
+
+## Phase 7 — Final Presentation
+
+Prepare:
+
+- Project documentation.
+- Architecture diagram.
+- Database diagram.
+- Screenshots.
+- Demonstration.
+- Team presentation.
+
+---
+
+# 36. Team Responsibilities
+
+### Member 1 — Frontend & UI
+
+Responsible for:
+
+- HTML.
+- CSS.
+- JavaScript.
+- Navigation.
+- User dashboard.
+- Responsive design.
+
+### Member 2 — Backend & Database
+
+Responsible for:
+
+- Flask.
+- SQLite.
+- API.
+- Authentication.
+- Score system.
+- Database design.
+
+### Member 3 — Cybersecurity Features
+
+Responsible for:
+
+- Phishing simulator.
+- Attack-defense simulator.
+- MFA simulation.
+- SOC dashboard.
+- CTF challenges.
+- Security testing.
+
+### Important
+
+All three members should understand the complete project so that any member can explain the system during the final evaluation.
+
+---
+
+# 37. MVP — Minimum Viable Product
+
+If development time becomes limited, the **MVP** should contain:
+
+### Must Have
+
+- Home page.
+- User login.
+- Phishing simulator.
+- Password checker.
+- MFA demonstration.
+- Basic attack-defense simulation.
+- SOC dashboard.
+- At least 5 CTF challenges.
+- Points system.
+- SQLite database.
+
+### Should Have
+
+- Leaderboard.
+- User progress.
+- Admin panel.
+- More challenges.
+
+### Could Have
+
+- Badges.
+- Achievements.
+- More advanced simulations.
+- Dark/light mode.
+- More detailed analytics.
+
+---
+
+# 38. Future Enhancements
+
+After the first version, CyberFortress could be expanded with:
+
+- More CTF challenges.
+- Achievement badges.
+- Difficulty levels.
+- Cybersecurity learning courses.
+- More attack simulations.
+- Security awareness certificates.
+- Advanced SOC analytics.
+- User profiles.
+- Challenge categories.
+- Real-time simulated alerts.
+- Instructor dashboard.
+- Multiplayer challenges.
+
+---
+
+# 39. Success Criteria
+
+The project will be considered successful if:
+
+- Users can successfully navigate the website.
+- All six major features work.
+- Users can complete interactive activities.
+- Scores are calculated correctly.
+- Data is stored correctly in SQLite.
+- SOC charts display correct simulated data.
+- CTF challenges correctly validate answers.
+- The application does not perform real attacks.
+- The interface is understandable to beginners.
+- The team can explain the architecture and implementation.
+
+---
+
+# 40. Final Product Vision
+
+The final CyberFortress experience should feel like a **small cybersecurity training center inside a website**.
+
+The user should be able to:
+
+```text
+        LEARN
+          ↓
+       PRACTICE
+          ↓
+       SIMULATE
+          ↓
+        SOLVE
+          ↓
+        SCORE
+          ↓
+       IMPROVE
+```
+
+The key idea is **not to build a real hacking platform**. Instead, CyberFortress should safely demonstrate cybersecurity concepts through controlled simulations and beginner-friendly challenges.
+
+### One-line project vision
+
+> **CyberFortress is an interactive cybersecurity learning platform that helps beginners learn, practice, and test their security knowledge through safe simulations, challenges, and security monitoring demonstrations.**
+
+This PRD gives you a solid scope for a **first-semester project** while leaving room for additional features if your team finishes early.

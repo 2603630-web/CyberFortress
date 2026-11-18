@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberFortress — Next-Gen Cyber Defense & Threat Intelligence Platform</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              bg: '#050a14',
+              surface: '#0b1329',
+              card: 'rgba(15, 23, 42, 0.65)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              cyan: '#00f0ff',
+              emerald: '#10b981',
+              neonGreen: '#00ff9d',
+              alert: '#f43f5e',
+              amber: '#f59e0b',
+              violet: '#818cf8',
+            }
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', '"Space Mono"', 'monospace'],
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+            display: ['"Orbitron"', '"Inter"', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'scanline': 'scanline 8s linear infinite',
+            'radar': 'radar 3s linear infinite',
+            'spin-slow': 'spin 12s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            scanline: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(1000%)' },
+            },
+            radar: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter, JetBrains Mono, Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050a14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f0ff55;
+    }
+
+    /* Core Glassmorphism Engine */
+    .glass-panel {
+      background: rgba(13, 23, 42, 0.68);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .glass-card {
+      background: rgba(15, 25, 48, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(20, 35, 68, 0.75);
+      border-color: rgba(0, 240, 255, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px -5px rgba(0, 240, 255, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .glass-button-primary {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 240, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      transition: all 0.25s ease;
+    }
+    .glass-button-primary:hover {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.35) 0%, rgba(16, 185, 129, 0.35) 100%);
+      border-color: rgba(0, 240, 255, 0.9);
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .glass-button-secondary {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: all 0.25s ease;
+    }
+    .glass-button-secondary:hover {
+      background: rgba(30, 41, 59, 0.8);
+      border-color: rgba(16, 185, 129, 0.6);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Glowing borders and accents */
+    .glow-cyan {
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+    }
+    .text-glow-cyan {
+      text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+    }
+    .text-glow-emerald {
+      text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+    }
+
+    /* Video controls override - strict eradication of browser controls & bottom lines */
+    video::-webkit-media-controls {
+      display: none !important;
+    }
+    video::-webkit-media-controls-enclosure {
+      display: none !important;
+    }
+    video::-webkit-media-controls-panel {
+      display: none !important;
+    }
+    video {
+      outline: none;
+      border: none;
+    }
+
+    /* Terminal Scanlines */
+    .scanline-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Custom Animations */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring {
+      animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-[#050a14] text-slate-100 font-sans antialiased overflow-x-hidden min-h-screen selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- ========================================================================= -->
+  <!-- AUDIO SYNTH ENGINE (ZERO DEPENDENCY PROCEDURAL SOUND FX) -->
+  <!-- ========================================================================= -->
+  <script>
+    const SoundFx = {
+      enabled: true,
+      ctx: null,
+      init() {
+        if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      },
+      play(type) {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          if (type === 'click') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(1400, now + 0.04);
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+            osc.start(now);
+            osc.stop(now + 0.04);
+          } else if (type === 'access') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(520, now);
+            osc.frequency.setValueAtTime(780, now + 0.08);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+            osc.start(now);
+            osc.stop(now + 0.25);
+          } else if (type === 'alert') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.setValueAtTime(330, now + 0.1);
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+            osc.start(now);
+            osc.stop(now + 0.2);
+          } else if (type === 'terminal') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1200, now);
+            gain.gain.setValueAtTime(0.04, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.02);
+            osc.start(now);
+            osc.stop(now + 0.02);
+          }
+        } catch (e) {
+          // Audio blocked or unsupported, silently continue
+        }
+      }
+    };
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 1: LANDING VIEW (CINEMATIC BACKGROUND VIDEO & HERO SEQUENCE) -->
+  <!-- ========================================================================= -->
+  <section id="view-landing" class="relative w-full min-h-screen flex flex-col justify-between overflow-hidden transition-opacity duration-700">
+    
+    <!-- Cinematic Looping Video (Clean, No Player Controls, Seamless Edge) -->
+    <div class="absolute inset-0 z-0 overflow-hidden bg-black pointer-events-none">
+      <video
+        id="landing-video-player"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        disablepictureinpicture
+        controlslist="nodownload nofullscreen noremoteplayback"
+        class="w-full h-full object-cover opacity-65 scale-105 transform filter contrast-125 brightness-90"
+      >
+        <source src="static/65771-515379416_medium.mp4" type="video/mp4">
+        <source src="prototype/protype-20261016T090153Z-1-001/65771-515379416_medium.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+
+      <!-- Dynamic Procedural Canvas Fallback / Cyber Overlay -->
+      <canvas id="cyber-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
+    </div>
+
+    <!-- Multi-Layer Cinematic Gradients & Tech Overlays -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#050a14] via-[#050a14]/65 to-[#050a14]/80 z-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.08)_0,transparent_70%)] z-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#00f0ff12_1px,transparent_1px)] [background-size:28px_28px] z-10 pointer-events-none"></div>
+
+    <!-- Subtle Ambient Glow Orbs -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="absolute top-1/3 -right-32 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 1.5s;"></div>
+
+    <!-- Top Floating Header Bar (Landing) -->
+    <header class="relative z-30 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500/20 to-emerald-500/20 border border-cyan-400/40 flex items-center justify-center glow-cyan backdrop-blur-md">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-black text-xl tracking-wider text-white">CYBER<span class="text-cyan-400">FORTRESS</span></span>
+          <span class="hidden sm:inline-block text-[10px] font-mono ml-2 px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">DEFENSE v4.2</span>
+        </div>
+      </div>
+
+      <!-- Quick Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Audio FX Toggle -->
+        <button id="sound-toggle-btn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-lg glass-card flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-cyan-300 transition-all">
+          <span id="sound-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span id="sound-text">AUDIO ON</span>
+        </button>
+
+        <!-- Direct Nav to Dashboard -->
+        <button onclick="navigateTo('dashboard')" class="hidden md:inline-flex px-4 py-1.5 rounded-lg text-xs font-mono text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/10 transition-all items-center gap-1.5">
+          <span>FAST DASHBOARD</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Hero Center Section with Entrance Animations -->
+    <main class="relative z-20 flex-1 flex flex-col items-center justify-center text-center px-4 py-8 max-w-5xl mx-auto">
+      
+      <!-- Live Status Capsule -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border-cyan-500/30 text-xs font-mono text-cyan-300 mb-6 glow-cyan transform hover:scale-105 transition-transform duration-300">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="tracking-widest font-semibold uppercase">SENTINEL DEFENSE ENGINE ACTIVE • REAL-TIME TELEMETRY</span>
+      </div>
+
+      <!-- Project Hero Title -->
+      <h1 class="text-5xl sm:text-7xl md:text-8xl font-black font-display tracking-tight text-white mb-4 leading-none select-none">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400">Cyber</span><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 text-glow-cyan">Fortress</span>
+      </h1>
+
+      <!-- Core Tagline -->
+      <div class="max-w-3xl mb-8">
+        <p class="text-lg sm:text-2xl font-mono text-cyan-300/90 font-medium tracking-wide mb-3">
+          DETECT • DEFEND • MITIGATE • RECOVER
+        </p>
+        <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+          The next-generation interactive cyber defense platform. Explore real-time threat intelligence, simulate adversary tactics, test cryptographic boundaries, and command enterprise incident response.
+        </p>
+      </div>
+
+      <!-- Sub-Pillars / Capabilities Highlights -->
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 text-xs sm:text-sm font-mono text-slate-300">
+        <div class="px-3.5 py-1.5 rounded-lg glass-card border-cyan-500/20 flex items-center gap-2">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>Real-time Threat Detection</span>
+        </div>
+        <div class="px-3.5 py-1.5 rounded-lg glass-card border-emerald-500/20 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span>Vulnerability Analysis</span>
+        </div>
+        <div class="px-3.5 py-1.5 rounded-lg glass-card border-purple-500/20 flex items-center gap-2">
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>Active Threat Mitigation</span>
+        </div>
+      </div>
+
+      <!-- THE TWO MANDATED GLASS-MORPHISM BUTTONS -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-5 w-full max-w-md">
+        
+        <!-- Button 1: Enter Console -->
+        <button
+          onclick="SoundFx.play('access'); navigateTo('console')"
+          class="w-full sm:w-1/2 group relative px-6 py-4 rounded-xl glass-button-secondary border-emerald-500/40 text-emerald-400 font-mono font-bold tracking-wider flex items-center justify-center gap-3 overflow-hidden cursor-pointer shadow-lg hover:border-emerald-400"
+        >
+          <div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <svg class="w-5 h-5 text-emerald-400 group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span class="relative z-10 text-sm">[ ENTER CONSOLE ]</span>
+        </button>
+
+        <!-- Button 2: Enter Dashboard -->
+        <button
+          onclick="SoundFx.play('access'); navigateTo('dashboard')"
+          class="w-full sm:w-1/2 group relative px-6 py-4 rounded-xl glass-button-primary text-white font-mono font-bold tracking-wider flex items-center justify-center gap-3 overflow-hidden cursor-pointer"
+        >
+          <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <svg class="w-5 h-5 text-cyan-300 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          <span class="relative z-10 text-sm text-cyan-200">[ ENTER DASHBOARD ]</span>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Bottom Telemetry Ticker Strip -->
+    <footer class="relative z-20 w-full max-w-7xl mx-auto px-6 py-4 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-xs font-mono text-slate-400 gap-3">
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          NETWORK LOAD: <span class="text-emerald-400 font-bold">14.2%</span>
+        </span>
+        <span class="hidden sm:inline-flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+          ATTACKS BLOCKED TODAY: <span class="text-cyan-400 font-bold">42,887</span>
+        </span>
+        <span class="hidden md:inline-flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+          ACTIVE NODES: <span class="text-purple-300 font-bold">1,024</span>
+        </span>
+      </div>
+      <div class="text-slate-400">
+        CyberFortress SOC Simulation Environment • v4.2
+      </div>
+    </footer>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 2: INTERACTIVE HACKER / SOC TERMINAL CONSOLE VIEW -->
+  <!-- ========================================================================= -->
+  <section id="view-console" class="hidden relative w-full min-h-screen flex flex-col p-4 sm:p-8 bg-[#030712] overflow-hidden">
+    
+    <!-- Background Terminal Matrix / Grid -->
+    <div class="absolute inset-0 bg-[radial-gradient(#00ff9d0d_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+    <div class="scanline-overlay absolute inset-0 pointer-events-none"></div>
+
+    <!-- Console Main Window (Glassmorphic Terminal Window) -->
+    <div class="relative z-10 flex-1 flex flex-col max-w-6xl w-full mx-auto glass-panel rounded-2xl border border-emerald-500/30 shadow-[0_0_50px_rgba(0,255,157,0.15)] overflow-hidden">
+      
+      <!-- Window Title Bar -->
+      <div class="px-5 py-3.5 bg-slate-900/80 border-b border-emerald-500/20 flex items-center justify-between backdrop-blur-md">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 border border-rose-400"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 border border-amber-400"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 border border-emerald-400"></span>
+          </div>
+          <span class="text-xs font-mono text-emerald-400 font-bold tracking-wider ml-2 flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            CYBERFORTRESS_ROOT_SHELL // tty1@sentinel-defense
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="SoundFx.play('click'); clearTerminal()" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] font-mono text-slate-300 hover:text-white border border-slate-700 hover:border-slate-500">
+            CLEAR
+          </button>
+          <button onclick="SoundFx.play('click'); navigateTo('dashboard')" class="px-3 py-1 rounded bg-cyan-500/20 text-[11px] font-mono text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 flex items-center gap-1">
+            <span>DASHBOARD</span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="SoundFx.play('click'); navigateTo('landing')" class="px-3 py-1 rounded bg-slate-800 text-[11px] font-mono text-slate-300 border border-slate-700 hover:text-white">
+            ESC INTRO
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Command Bar -->
+      <div class="px-5 py-2 bg-slate-950/60 border-b border-emerald-500/10 flex flex-wrap items-center gap-2 text-xs font-mono">
+        <span class="text-slate-400">QUICK CMDS:</span>
+        <button onclick="runCommand('help')" class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20">help</button>
+        <button onclick="runCommand('scan 192.168.1.105')" class="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 hover:bg-cyan-500/20">scan</button>
+        <button onclick="runCommand('threats')" class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20">threats</button>
+        <button onclick="runCommand('status')" class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 hover:bg-indigo-500/20">status</button>
+        <button onclick="runCommand('mitigate all')" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 hover:bg-amber-500/20">mitigate all</button>
+        <button onclick="runCommand('decrypt SGVsbG8gQ3liZXJTaGllbGQ=')" class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20">decrypt</button>
+      </div>
+
+      <!-- Terminal Output Scrollable Area -->
+      <div id="terminal-body" class="flex-1 p-5 overflow-y-auto font-mono text-sm space-y-2 text-slate-200 leading-relaxed select-text">
+        <div class="text-emerald-400 font-bold leading-tight">
+<pre class="font-mono text-xs sm:text-sm text-cyan-400 select-none">
+  ______       __               _____ __    _      __    __
+ / ____/_  __/ /_  ___  _____ / ___// /_  (_)__  / /___/ /
+/ /   / / / / __ \/ _ \/ ___/ \__ \/ __ \/ / _ \/ / __  / 
+/ /___/ /_/ / /_/ /  __/ /    ___/ / / / / /  __/ / /_/ /  
+\____/\__, /_.___/\___/_/    /____/_/ /_/_/\___/_/\__,_/   
+     /____/  SENTINEL OS v4.2 // SECURITY AUTOMATION SHELL
+</pre>
+        </div>
+        <p class="text-xs text-slate-400">System core initialized at <span id="terminal-boot-time" class="text-emerald-300">UTC</span>. Active Defensive posture engaged.</p>
+        <p class="text-xs text-cyan-300/80">Type <span class="text-emerald-400 font-bold underline">help</span> to list available commands or click the shortcut chips above.</p>
+        <div class="border-b border-emerald-500/20 my-2"></div>
+        <div id="terminal-history" class="space-y-3">
+          <!-- Commands output injected here -->
+        </div>
+      </div>
+
+      <!-- Command Input Line -->
+      <div class="px-5 py-3.5 bg-slate-950/80 border-t border-emerald-500/20 flex items-center gap-3">
+        <span class="text-emerald-400 font-mono font-bold text-sm shrink-0 flex items-center gap-1">
+          <span>root@cyberfortress</span><span class="text-cyan-400">:~#</span>
+        </span>
+        <input
+          id="terminal-input"
+          type="text"
+          class="flex-1 bg-transparent border-none outline-none font-mono text-sm text-emerald-300 placeholder-slate-600 focus:ring-0"
+          placeholder="type a command (e.g. scan, status, threats, mitigate, help)..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button onclick="handleTerminalSubmit()" class="px-3 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-mono hover:bg-emerald-500/30">
+          EXECUTE
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 3: FULL DASHBOARD CONTROL CENTER VIEW -->
+  <!-- ========================================================================= -->
+  <section id="view-dashboard" class="hidden relative w-full min-h-screen flex flex-col bg-[#050a14] pb-16">
+    
+    <!-- Background Glows -->
+    <div class="fixed top-20 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 right-1/4 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed inset-0 bg-[radial-gradient(#19c7f30a_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none -z-10"></div>
+
+    <!-- Top Dashboard Header Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/10 px-6 py-3.5 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        
+        <!-- Brand & Health Status -->
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500/20 to-emerald-500/20 border border-cyan-400/50 flex items-center justify-center glow-cyan cursor-pointer" onclick="navigateTo('landing')">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-display font-black text-lg tracking-wider text-white">CYBER<span class="text-cyan-400">FORTRESS</span></span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                DEFCON 3 // ELEVATED
+              </span>
+            </div>
+            <p class="text-[11px] font-mono text-slate-400 hidden sm:block">Real-time Telemetry & Threat Defense Center</p>
+          </div>
+        </div>
+
+        <!-- Telemetry Clock & Quick Action Buttons -->
+        <div class="flex items-center gap-3">
+          <!-- Real-time Defense Clock -->
+          <div class="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-lg glass-card text-xs font-mono text-slate-300 border-white/10">
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="defense-clock" class="text-cyan-300 font-bold">--:--:-- UTC</span>
+          </div>
+
+          <!-- Console Shortcut -->
+          <button onclick="SoundFx.play('click'); navigateTo('console')" class="px-3.5 py-1.5 rounded-lg glass-button-secondary border-emerald-500/40 text-emerald-300 text-xs font-mono flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span>CONSOLE</span>
+          </button>
+
+          <!-- Landing View Return -->
+          <button onclick="SoundFx.play('click'); navigateTo('landing')" class="px-3 py-1.5 rounded-lg glass-card text-xs font-mono text-slate-300 hover:text-white border-white/10 hover:border-cyan-400/40 transition-colors">
+            INTRO
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
+
+      <!-- ========================================================================= -->
+      <!-- TOP TELEMETRY METRIC CARDS (4 STATS) -->
+      <!-- ========================================================================= -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Stat 1: Global Threat Risk -->
+        <div class="glass-card p-4 rounded-xl border-white/10 relative overflow-hidden">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+            <span>GLOBAL THREAT RISK</span>
+            <span class="text-emerald-400 font-bold">14% [LOW]</span>
+          </div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-2xl font-bold font-display text-white">NORMAL</span>
+            <span class="text-xs text-emerald-400 font-mono">↓ -3.2% vs avg</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full" style="width: 28%"></div>
+          </div>
+        </div>
+
+        <!-- Stat 2: Mitigated Attacks -->
+        <div class="glass-card p-4 rounded-xl border-white/10 relative overflow-hidden">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+            <span>ATTACKS NEUTRALIZED</span>
+            <span class="text-cyan-400 font-bold">99.8%</span>
+          </div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span id="stat-attacks-count" class="text-2xl font-bold font-display text-cyan-300">42,887</span>
+            <span class="text-xs text-cyan-400 font-mono">Automated Drops</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" style="width: 92%"></div>
+          </div>
+        </div>
+
+        <!-- Stat 3: SIEM Active Alerts -->
+        <div class="glass-card p-4 rounded-xl border-white/10 relative overflow-hidden">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+            <span>SIEM ACTIVE ALERTS</span>
+            <span class="text-amber-400 font-bold">48 QUEUED</span>
+          </div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-2xl font-bold font-display text-amber-300">5 CRITICAL</span>
+            <span class="text-xs text-amber-400 font-mono">Avg Resp: 42s</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-amber-400 to-rose-500 rounded-full" style="width: 45%"></div>
+          </div>
+        </div>
+
+        <!-- Stat 4: Security Score / XP -->
+        <div class="glass-card p-4 rounded-xl border-white/10 relative overflow-hidden">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+            <span>OPERATOR DEFENSE XP</span>
+            <span class="text-indigo-400 font-bold">LEVEL 2</span>
+          </div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span id="stat-xp-count" class="text-2xl font-bold font-display text-indigo-300">650 XP</span>
+            <span class="text-xs text-slate-400 font-mono">Cyber Defender</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+            <div id="stat-xp-bar" class="h-full bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full" style="width: 65%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- DYNAMIC TELEMETRY AREA CHART & LIVE ALERT STREAM -->
+      <!-- ========================================================================= -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Live Threat Matrix Area Wave (SVG Chart) -->
+        <div class="lg:col-span-2 glass-panel p-5 rounded-2xl border-white/10">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-sm font-mono font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                NETWORK TELEMETRY & ATTACK TRAFFIC STREAM
+              </h3>
+              <p class="text-xs text-slate-400 font-mono mt-0.5">Real-time packet inspection (Packets/Sec vs Dropped Payloads)</p>
+            </div>
+            
+            <!-- Time Window Switcher -->
+            <div class="flex items-center gap-1.5 bg-slate-900/60 p-1 rounded-lg border border-white/10 text-xs font-mono">
+              <button onclick="switchTimeRange('6h')" id="btn-time-6h" class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">6H</button>
+              <button onclick="switchTimeRange('12h')" id="btn-time-12h" class="px-2.5 py-1 rounded text-slate-400 hover:text-white">12H</button>
+              <button onclick="switchTimeRange('24h')" id="btn-time-24h" class="px-2.5 py-1 rounded text-slate-400 hover:text-white">24H</button>
+            </div>
+          </div>
+
+          <!-- Dynamic SVG Vector Area Chart -->
+          <div class="relative w-full h-44 sm:h-48 overflow-hidden rounded-xl bg-slate-950/40 border border-white/5 p-2">
+            <svg id="telemetry-chart-svg" class="w-full h-full" viewBox="0 0 800 150" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="cyberAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.0"/>
+                </linearGradient>
+                <linearGradient id="cyberLineGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#10b981"/>
+                  <stop offset="50%" stop-color="#00f0ff"/>
+                  <stop offset="100%" stop-color="#818cf8"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Grid Horizontal Lines -->
+              <line x1="0" y1="30" x2="800" y2="30" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+              <line x1="0" y1="75" x2="800" y2="75" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+              <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.05)" stroke-dasharray="4"/>
+
+              <!-- Area Fill -->
+              <path id="chart-area-path" d="M 0,110 Q 100,50 200,90 T 400,40 T 600,70 T 800,30 L 800,150 L 0,150 Z" fill="url(#cyberAreaGrad)"/>
+              
+              <!-- Stroke Line -->
+              <path id="chart-stroke-path" d="M 0,110 Q 100,50 200,90 T 400,40 T 600,70 T 800,30" fill="none" stroke="url(#cyberLineGrad)" stroke-width="3" filter="drop-shadow(0 0 8px rgba(0,240,255,0.6))"/>
+            </svg>
+
+            <!-- Chart Bottom Labels -->
+            <div class="absolute bottom-1 left-4 right-4 flex justify-between text-[10px] font-mono text-slate-500">
+              <span>T-6h</span>
+              <span>T-4h</span>
+              <span>T-2h</span>
+              <span>NOW (ACTIVE)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time SOC Event Stream Ticker -->
+        <div class="glass-panel p-5 rounded-2xl border-white/10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-mono font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                LIVE SOC FEED
+              </h3>
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">STREAMING</span>
+            </div>
+            
+            <div id="live-stream-list" class="space-y-2.5 overflow-hidden">
+              <!-- Event Items -->
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-mono flex items-start justify-between">
+                <div>
+                  <div class="text-rose-400 font-semibold">[CRITICAL] SSH Brute Force</div>
+                  <div class="text-[11px] text-slate-400">198.51.100.44 → Port 22</div>
+                </div>
+                <span class="text-[10px] text-slate-500">1m ago</span>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-mono flex items-start justify-between">
+                <div>
+                  <div class="text-amber-400 font-semibold">[HIGH] Phishing Payload</div>
+                  <div class="text-[11px] text-slate-400">Mail relay: hr-payroll.xyz</div>
+                </div>
+                <span class="text-[10px] text-slate-500">3m ago</span>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-mono flex items-start justify-between">
+                <div>
+                  <div class="text-emerald-400 font-semibold">[SUCCESS] MFA Token Verified</div>
+                  <div class="text-[11px] text-slate-400">User: analyst_07 (TOTP)</div>
+                </div>
+                <span class="text-[10px] text-slate-500">6m ago</span>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="openModal('soc')" class="w-full mt-3 py-2 rounded-xl text-xs font-mono text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all text-center">
+            VIEW FULL INCIDENT QUEUE →
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION TITLE: THE 6 CORE CYBER DEFENSE MODULES -->
+      <!-- ========================================================================= -->
+      <div class="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold font-display text-white flex items-center gap-2.5">
+            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            Core Cyber Defense Modules
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400 font-mono">Interactive simulators, telemetry checks, and CTF arenas defined in CyberFortress PRD.</p>
+        </div>
+
+        <div class="text-xs font-mono text-slate-400">
+          Click any card to launch interactive simulation modal
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- GRID OF 6 CORE PROJECT FEATURES (WITH RICH GRAPHICAL VISUALS) -->
+      <!-- ========================================================================= -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- ===================================================================== -->
+        <!-- CARD 1: PHISHING AWARENESS SIMULATOR -->
+        <!-- ===================================================================== -->
+        <div onclick="SoundFx.play('click'); openModal('phishing')" class="glass-card p-6 rounded-2xl flex flex-col justify-between cursor-pointer group">
+          <div>
+            <!-- Header & Badge -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-semibold">
+                FEATURE 01 • ACTIVE
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-lg font-bold font-display text-white group-hover:text-cyan-300 transition-colors mb-2">
+              Phishing Awareness Simulator
+            </h3>
+            <p class="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+              Inspect suspicious enterprise emails, unmask spoofed senders, detect urgent social engineering cues, and verify deceptive URLs.
+            </p>
+
+            <!-- Distinct Graphical Visualizer: Animated Radar Scanner -->
+            <div class="relative w-full h-28 rounded-xl bg-slate-950/70 border border-cyan-500/20 overflow-hidden flex items-center justify-center mb-4">
+              <!-- Radar Circles -->
+              <div class="absolute w-20 h-20 rounded-full border border-cyan-500/20"></div>
+              <div class="absolute w-12 h-12 rounded-full border border-cyan-500/30"></div>
+              <div class="absolute w-4 h-4 rounded-full bg-cyan-500/40"></div>
+              
+              <!-- Rotating Sweep Beam -->
+              <div class="absolute w-24 h-24 origin-center animate-radar pointer-events-none">
+                <div class="w-12 h-12 bg-gradient-to-tr from-cyan-400/40 to-transparent rounded-tl-full"></div>
+              </div>
+
+              <!-- Threat Blips -->
+              <div class="absolute top-6 left-12 w-2 h-2 rounded-full bg-rose-400 animate-ping"></div>
+              <div class="absolute top-6 left-12 w-2 h-2 rounded-full bg-rose-500"></div>
+              <div class="absolute bottom-6 right-14 w-2 h-2 rounded-full bg-emerald-400"></div>
+
+              <!-- HUD Metric -->
+              <div class="absolute bottom-1.5 left-3 text-[10px] font-mono text-cyan-400/80">
+                RADAR: 3 CUES DETECTED
+              </div>
+              <div class="absolute bottom-1.5 right-3 text-[10px] font-mono text-emerald-400 font-bold">
+                ACCURACY: 98%
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-cyan-400">
+            <span>LAUNCH SIMULATOR</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- CARD 2: ATTACK & DEFENSE SIMULATOR -->
+        <!-- ===================================================================== -->
+        <div onclick="SoundFx.play('click'); openModal('attack')" class="glass-card p-6 rounded-2xl flex flex-col justify-between cursor-pointer group">
+          <div>
+            <!-- Header & Badge -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-semibold">
+                FEATURE 02 • LIVE GRID
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-lg font-bold font-display text-white group-hover:text-emerald-300 transition-colors mb-2">
+              Attack & Defense Simulator
+            </h3>
+            <p class="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+              Simulate live multi-stage cyber attacks (Brute Force, DDoS, SQLi) and toggle active countermeasures: IP Block, WAF, and Host Isolation.
+            </p>
+
+            <!-- Distinct Graphical Visualizer: 4-Node Defense Topology Grid -->
+            <div class="relative w-full h-28 rounded-xl bg-slate-950/70 border border-emerald-500/20 overflow-hidden flex items-center justify-around px-2 mb-4">
+              <!-- Node 1: Attacker -->
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-lg bg-rose-500/20 border border-rose-500/50 flex items-center justify-center text-rose-400 text-xs font-mono">
+                  ATK
+                </div>
+                <span class="text-[9px] font-mono text-rose-400 mt-1">198.51.0</span>
+              </div>
+
+              <!-- Animated Stream Arrow -->
+              <div class="flex-1 px-1 flex items-center justify-center">
+                <div class="w-full h-0.5 bg-gradient-to-r from-rose-500 via-amber-400 to-emerald-400 relative">
+                  <div class="absolute -top-1 w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
+                </div>
+              </div>
+
+              <!-- Node 2: WAF Firewall -->
+              <div class="flex flex-col items-center">
+                <div class="w-9 h-9 rounded-lg bg-emerald-500/20 border border-emerald-500/60 flex items-center justify-center text-emerald-300 text-xs font-mono font-bold glow-emerald">
+                  WAF
+                </div>
+                <span class="text-[9px] font-mono text-emerald-400 mt-1">SHIELD</span>
+              </div>
+
+              <!-- Stream Arrow -->
+              <div class="flex-1 px-1 flex items-center justify-center">
+                <div class="w-full h-0.5 bg-slate-700"></div>
+              </div>
+
+              <!-- Node 3: Core Server -->
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-cyan-400 text-xs font-mono">
+                  SRV
+                </div>
+                <span class="text-[9px] font-mono text-cyan-400 mt-1">SAFE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-emerald-400">
+            <span>DEPLOY DEFENSES</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- CARD 3: PASSWORD SECURITY CHECKER -->
+        <!-- ===================================================================== -->
+        <div onclick="SoundFx.play('click'); openModal('password')" class="glass-card p-6 rounded-2xl flex flex-col justify-between cursor-pointer group">
+          <div>
+            <!-- Header & Badge -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30 font-semibold">
+                FEATURE 03 • ZERO-STORAGE
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-lg font-bold font-display text-white group-hover:text-purple-300 transition-colors mb-2">
+              Password Security Checker
+            </h3>
+            <p class="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+              Client-side entropy analyzer, dictionary collision detection, and GPU cluster brute-force crack-time estimation model.
+            </p>
+
+            <!-- Distinct Graphical Visualizer: Entropy Gauge & Crack Time Bar -->
+            <div class="relative w-full h-28 rounded-xl bg-slate-950/70 border border-purple-500/20 overflow-hidden flex flex-col justify-between p-3 mb-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono text-slate-400">SHANNON ENTROPY:</span>
+                <span class="text-xs font-mono font-bold text-purple-300">78.4 BITS</span>
+              </div>
+              
+              <!-- Segmented Entropy Level Bars -->
+              <div class="flex gap-1.5 my-1">
+                <div class="flex-1 h-2 rounded bg-rose-500"></div>
+                <div class="flex-1 h-2 rounded bg-amber-500"></div>
+                <div class="flex-1 h-2 rounded bg-emerald-400"></div>
+                <div class="flex-1 h-2 rounded bg-cyan-400"></div>
+                <div class="flex-1 h-2 rounded bg-purple-500 shadow-[0_0_8px_#a855f7]"></div>
+              </div>
+
+              <div class="flex items-center justify-between text-[10px] font-mono">
+                <span class="text-slate-400">CRACK TIME (8x RTX 4090):</span>
+                <span class="text-cyan-300 font-bold">~ 14M YEARS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-purple-400">
+            <span>CHECK ENTROPY</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- CARD 4: MFA DEMONSTRATION HUB -->
+        <!-- ===================================================================== -->
+        <div onclick="SoundFx.play('click'); openModal('mfa')" class="glass-card p-6 rounded-2xl flex flex-col justify-between cursor-pointer group">
+          <div>
+            <!-- Header & Badge -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30 font-semibold">
+                FEATURE 04 • ZERO TRUST
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-lg font-bold font-display text-white group-hover:text-blue-300 transition-colors mb-2">
+              MFA Demonstration Hub
+            </h3>
+            <p class="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+              Experience why passwords alone fail. Test interactive 30-second rolling TOTP authenticator tokens and cryptographic key handshakes.
+            </p>
+
+            <!-- Distinct Graphical Visualizer: Live TOTP Rotating Token Ring -->
+            <div class="relative w-full h-28 rounded-xl bg-slate-950/70 border border-blue-500/20 overflow-hidden flex items-center justify-between px-5 mb-4">
+              <!-- 6-digit TOTP Code -->
+              <div>
+                <span class="text-[10px] font-mono text-slate-400 block">ROLLING TOTP TOKEN</span>
+                <span id="preview-totp-code" class="text-2xl font-mono font-bold tracking-widest text-cyan-300">
+                  849 201
+                </span>
+                <span class="text-[10px] font-mono text-emerald-400 block mt-0.5">● SYNCHRONIZED</span>
+              </div>
+
+              <!-- Rotating Countdown Ring -->
+              <div class="relative w-14 h-14 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90">
+                  <circle cx="28" cy="28" r="22" stroke="rgba(255,255,255,0.1)" stroke-width="3" fill="none"/>
+                  <circle id="totp-preview-ring" cx="28" cy="28" r="22" stroke="#00f0ff" stroke-width="3" fill="none" stroke-dasharray="138" stroke-dashoffset="40"/>
+                </svg>
+                <span id="totp-preview-secs" class="absolute text-xs font-mono font-bold text-white">18s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-blue-400">
+            <span>EXPERIENCE 2FA</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- CARD 5: MINI SOC DASHBOARD & INCIDENT RESPONSE -->
+        <!-- ===================================================================== -->
+        <div onclick="SoundFx.play('click'); openModal('soc')" class="glass-card p-6 rounded-2xl flex flex-col justify-between cursor-pointer group">
+          <div>
+            <!-- Header & Badge -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 font-semibold">
+                FEATURE 05 • SIEM TRIAGE
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-lg font-bold font-display text-white group-hover:text-amber-300 transition-colors mb-2">
+              Mini SOC Dashboard & Incident Response
+            </h3>
+            <p class="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+              SIEM alert correlation engine, severity-based queuing, forensic log investigation, and containment playbook executions.
+            </p>
+
+            <!-- Distinct Graphical Visualizer: Severity Distribution Stack -->
+            <div class="relative w-full h-28 rounded-xl bg-slate-950/70 border border-amber-500/20 overflow-hidden flex flex-col justify-around p-3 mb-4">
+              <!-- Critical Row -->
+              <div>
+                <div class="flex justify-between text-[10px] font-mono mb-1">
+                  <span class="text-rose-400 font-bold">CRITICAL (5 ALERTS)</span>
+                  <span class="text-slate-400">10%</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-slate-800">
+                  <div class="h-full bg-rose-500 rounded-full" style="width: 25%"></div>
+                </div>
+              </div>
+
+              <!-- High Row -->
+              <div>
+                <div class="flex justify-between text-[10px] font-mono mb-1">
+                  <span class="text-amber-400 font-bold">HIGH (18 ALERTS)</span>
+                  <span class="text-slate-400">38%</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-slate-800">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 55%"></div>
+                </div>
+              </div>
+
+              <!-- Medium & Low -->
+              <div>
+                <div class="flex justify-between text-[10px] font-mono mb-1">
+                  <span class="text-cyan-400 font-bold">MEDIUM / LOW (25 ALERTS)</span>
+                  <span class="text-slate-400">52%</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-slate-800">
+                  <div class="h-full bg-cyan-400 rounded-full" style="width: 78%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-amber-400">
+            <span>TRIAGE ALERTS</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- CARD 6: CYBERFORTRESS CTF CHALLENGES -->
+        <!-- ===================================================================== -->
+        <div onclick="SoundFx.play('click'); openModal('ctf')" class="glass-card p-6 rounded-2xl flex flex-col justify-between cursor-pointer group">
+          <div>
+            <!-- Header & Badge -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/30 font-semibold">
+                FEATURE 06 • GAMIFIED
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-lg font-bold font-display text-white group-hover:text-teal-300 transition-colors mb-2">
+              CyberFortress CTF Arena
+            </h3>
+            <p class="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+              Solve safe educational puzzles: Base64 cipher breaking, log correlation forensics, flag capture (`CS{...}`), and student leaderboard.
+            </p>
+
+            <!-- Distinct Graphical Visualizer: Flag Vault Decryption Dial -->
+            <div class="relative w-full h-28 rounded-xl bg-slate-950/70 border border-teal-500/20 overflow-hidden flex items-center justify-between px-4 mb-4">
+              <!-- Flag Box -->
+              <div>
+                <span class="text-[10px] font-mono text-slate-400 block">CURRENT MISSION</span>
+                <span class="text-sm font-mono font-bold text-teal-300 block">
+                  CS{cyber_sentinel_2026}
+                </span>
+                <span class="text-[10px] font-mono text-indigo-400 block mt-0.5">REWARD: +50 XP</span>
+              </div>
+
+              <!-- Vault Dial Graphic -->
+              <div class="w-12 h-12 rounded-full border-2 border-dashed border-teal-400/60 flex items-center justify-center animate-spin-slow">
+                <div class="w-6 h-6 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-300 text-xs font-mono font-bold">
+                  ★
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Action -->
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-teal-400">
+            <span>ENTER CTF ARENA</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL / SLIDE-OVER DRAWER COMPONENT (ADVANCED FEATURE SUB-DETAILS) -->
+  <!-- ========================================================================= -->
+  <div id="feature-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-md transition-opacity">
+    
+    <!-- Modal Window Box -->
+    <div class="relative w-full max-w-4xl glass-panel rounded-2xl border border-cyan-500/40 shadow-[0_0_60px_rgba(0,240,255,0.2)] overflow-hidden my-auto transform transition-all">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-900/90 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div id="modal-icon-container" class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+            <!-- Icon injected -->
+          </div>
+          <div>
+            <h3 id="modal-title" class="text-lg font-bold font-display text-white">Module Title</h3>
+            <p id="modal-subtitle" class="text-xs font-mono text-cyan-300">Advanced Diagnostic Sub-details & Interactive Sandbox</p>
+          </div>
+        </div>
+
+        <button onclick="SoundFx.play('click'); closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Dynamic Interactive Content) -->
+      <div id="modal-content" class="p-6 max-h-[75vh] overflow-y-auto space-y-6">
+        <!-- Content injected dynamically via openModal(type) -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3.5 bg-slate-950/80 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+        <span class="text-slate-400">CyberFortress Sandbox Session #84920</span>
+        <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 transition-colors">
+          CLOSE DRAWER
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT STATE ENGINE & INTERACTIVE CONTROLLERS -->
+  <!-- ========================================================================= -->
+  <script>
+    // --- Application State ---
+    const State = {
+      currentView: 'landing',
+      xp: 650,
+      attacksBlocked: 42887,
+      totpCode: '849 201',
+      totpCountdown: 24,
+      audioMuted: false,
+    };
+
+    // --- Audio Toggle Controller ---
+    function toggleAudio() {
+      SoundFx.enabled = !SoundFx.enabled;
+      const indicator = document.getElementById('sound-indicator');
+      const text = document.getElementById('sound-text');
+      if (SoundFx.enabled) {
+        indicator.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-ping';
+        text.innerText = 'AUDIO ON';
+        SoundFx.play('access');
+      } else {
+        indicator.className = 'w-2 h-2 rounded-full bg-slate-500';
+        text.innerText = 'MUTED';
+      }
+    }
+
+    // --- Navigation View Switcher ---
+    function navigateTo(viewId) {
+      const views = ['landing', 'console', 'dashboard'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) {
+          if (v === viewId) {
+            el.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      });
+      State.currentView = viewId;
+
+      if (viewId === 'console') {
+        const input = document.getElementById('terminal-input');
+        if (input) setTimeout(() => input.focus(), 100);
+      }
+    }
+
+    // --- UTC Live Defense Clock ---
+    function updateClock() {
+      const now = new Date();
+      const utcString = now.toUTCString().split(' ')[4] + ' UTC';
+      const clockEl = document.getElementById('defense-clock');
+      const bootTimeEl = document.getElementById('terminal-boot-time');
+      if (clockEl) clockEl.innerText = utcString;
+      if (bootTimeEl && bootTimeEl.innerText === 'UTC') bootTimeEl.innerText = utcString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // --- TOTP Rotating Code Simulator ---
+    function startTotpEngine() {
+      setInterval(() => {
+        State.totpCountdown--;
+        if (State.totpCountdown <= 0) {
+          State.totpCountdown = 30;
+          // Generate new simulated 6-digit code
+          const rand = Math.floor(100000 + Math.random() * 900000).toString();
+          State.totpCode = rand.slice(0, 3) + ' ' + rand.slice(3);
+          
+          const codeEl = document.getElementById('preview-totp-code');
+          if (codeEl) codeEl.innerText = State.totpCode;
+          
+          const modalTotp = document.getElementById('modal-totp-display');
+          if (modalTotp) modalTotp.innerText = State.totpCode;
+        }
+
+        // Update preview ring
+        const secEl = document.getElementById('totp-preview-secs');
+        if (secEl) secEl.innerText = `${State.totpCountdown}s`;
+        
+        const ring = document.getElementById('totp-preview-ring');
+        if (ring) {
+          const offset = 138 - (138 * (State.totpCountdown / 30));
+          ring.style.strokeDashoffset = offset;
+        }
+      }, 1000);
+    }
+    startTotpEngine();
+
+    // --- Dynamic Sparkline Area Switcher ---
+    function switchTimeRange(range) {
+      SoundFx.play('click');
+      ['6h', '12h', '24h'].forEach(r => {
+        const btn = document.getElementById(`btn-time-${r}`);
+        if (btn) {
+          if (r === range) {
+            btn.className = "px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+          } else {
+            btn.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white";
+          }
+        }
+      });
+
+      const area = document.getElementById('chart-area-path');
+      const stroke = document.getElementById('chart-stroke-path');
+      if (range === '6h') {
+        area.setAttribute('d', 'M 0,110 Q 100,50 200,90 T 400,40 T 600,70 T 800,30 L 800,150 L 0,150 Z');
+        stroke.setAttribute('d', 'M 0,110 Q 100,50 200,90 T 400,40 T 600,70 T 800,30');
+      } else if (range === '12h') {
+        area.setAttribute('d', 'M 0,90 Q 150,120 300,50 T 500,80 T 700,20 T 800,60 L 800,150 L 0,150 Z');
+        stroke.setAttribute('d', 'M 0,90 Q 150,120 300,50 T 500,80 T 700,20 T 800,60');
+      } else {
+        area.setAttribute('d', 'M 0,70 Q 120,40 240,100 T 480,30 T 720,90 T 800,45 L 800,150 L 0,150 Z');
+        stroke.setAttribute('d', 'M 0,70 Q 120,40 240,100 T 480,30 T 720,90 T 800,45');
+      }
+    }
+
+    // --- Interactive Terminal Logic ---
+    const terminalHistory = document.getElementById('terminal-history');
+    const terminalInput = document.getElementById('terminal-input');
+
+    function appendTerminal(html) {
+      if (!terminalHistory) return;
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      terminalHistory.appendChild(div);
+      const body = document.getElementById('terminal-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    }
+
+    function clearTerminal() {
+      if (terminalHistory) terminalHistory.innerHTML = '';
+    }
+
+    function runCommand(cmdText) {
+      if (!terminalInput) return;
+      terminalInput.value = cmdText;
+      handleTerminalSubmit();
+    }
+
+    function handleTerminalSubmit() {
+      if (!terminalInput) return;
+      const cmd = terminalInput.value.trim();
+      if (!cmd) return;
+      terminalInput.value = '';
+
+      SoundFx.play('terminal');
+
+      // Echo input
+      appendTerminal(`
+        <div class="flex items-center gap-1.5 text-xs text-slate-400">
+          <span class="text-emerald-400 font-bold">root@cyberfortress:~#</span>
+          <span class="text-white font-bold">${escapeHtml(cmd)}</span>
+        </div>
+      `);
+
+      const parts = cmd.split(' ');
+      const action = parts[0].toLowerCase();
+      const arg = parts.slice(1).join(' ');
+
+      switch (action) {
+        case 'help':
+          appendTerminal(`
+            <div class="p-3 rounded bg-slate-900/60 border border-emerald-500/20 text-xs space-y-1.5 text-slate-300">
+              <div class="text-emerald-400 font-bold">AVAILABLE SENTINEL CLI COMMANDS:</div>
+              <div><span class="text-cyan-300 font-bold">help</span> - Display this reference manual</div>
+              <div><span class="text-cyan-300 font-bold">scan [target]</span> - Run vulnerability & port scanner on target IP</div>
+              <div><span class="text-cyan-300 font-bold">threats</span> - Stream active high-priority detected intrusions</div>
+              <div><span class="text-cyan-300 font-bold">status</span> - Inspect global DEFCON security posture and firewall metrics</div>
+              <div><span class="text-cyan-300 font-bold">mitigate [id/all]</span> - Apply active quarantine rules to offending nodes</div>
+              <div><span class="text-cyan-300 font-bold">decrypt [hash]</span> - Crack or decode Base64 educational ciphers</div>
+              <div><span class="text-cyan-300 font-bold">dashboard</span> - Open the CyberFortress Graphical Control Center</div>
+              <div><span class="text-cyan-300 font-bold">clear</span> - Flush terminal buffer</div>
+            </div>
+          `);
+          break;
+
+        case 'scan':
+          const target = arg || '192.168.1.105';
+          appendTerminal(`
+            <div class="text-xs font-mono text-cyan-300">
+              <div>[*] Launching asynchronous TCP/UDP SYN stealth probe against <span class="text-white font-bold">${target}</span>...</div>
+              <div class="text-slate-400 mt-1">[+] Port 22/tcp (SSH) ......... <span class="text-amber-400">OPEN [Weak Ciphers Detected]</span></div>
+              <div class="text-slate-400">[+] Port 80/tcp (HTTP) ........ <span class="text-emerald-400">FILTERED [Cloud WAF Active]</span></div>
+              <div class="text-slate-400">[+] Port 443/tcp (HTTPS) ...... <span class="text-emerald-400">OPEN [TLS 1.3 Strict]</span></div>
+              <div class="text-slate-400">[+] Port 3306/tcp (MySQL) ..... <span class="text-rose-400">EXPOSED [Authentication Required]</span></div>
+              <div class="text-emerald-400 font-bold mt-1.5">[✓] Scan complete. 2 vulnerabilities cataloged. Mitigations ready.</div>
+            </div>
+          `);
+          break;
+
+        case 'threats':
+          appendTerminal(`
+            <div class="p-3 rounded bg-slate-900/60 border border-rose-500/20 text-xs space-y-1">
+              <div class="text-rose-400 font-bold">[!] ACTIVE ADVERSARIAL THREAT LOGS:</div>
+              <div class="text-slate-300">1. <span class="text-amber-300 font-mono">198.51.100.44</span> | SSH Dictionary Attack | <span class="text-rose-400 font-bold">CRITICAL</span> | Status: Analyzing</div>
+              <div class="text-slate-300">2. <span class="text-amber-300 font-mono">203.0.113.19</span> | SYN Flood DDoS (42k pkts/s) | <span class="text-rose-400 font-bold">CRITICAL</span> | Status: Rate-Limited</div>
+              <div class="text-slate-300">3. <span class="text-amber-300 font-mono">192.0.2.89</span> | SQL Injection Probe in URI | <span class="text-amber-400 font-bold">HIGH</span> | Status: Blocked</div>
+              <div class="text-cyan-300 mt-1">Run <span class="text-emerald-400 font-bold">mitigate all</span> to enforce immediate isolation.</div>
+            </div>
+          `);
+          break;
+
+        case 'status':
+          appendTerminal(`
+            <div class="p-3 rounded bg-slate-900/60 border border-emerald-500/20 text-xs space-y-1 font-mono">
+              <div class="text-emerald-400 font-bold">[+] CYBERFORTRESS SYSTEM INTEGRITY POSTURE:</div>
+              <div>- DEFCON LEVEL: <span class="text-cyan-300 font-bold">DEFCON 3 (ELEVATED READINESS)</span></div>
+              <div>- ACTIVE SHIELD CORE: <span class="text-emerald-400">ONLINE [UPTIME 99.98%]</span></div>
+              <div>- AUTOMATED MITIGATION ENGINE: <span class="text-emerald-400">ENABLED</span></div>
+              <div>- ZERO TRUST ENFORCEMENT: <span class="text-emerald-400">100% COVERAGE</span></div>
+              <div>- TOTAL PAYLOADS NEUTRALIZED: <span class="text-cyan-300 font-bold">${State.attacksBlocked}</span></div>
+            </div>
+          `);
+          break;
+
+        case 'mitigate':
+          SoundFx.play('access');
+          State.attacksBlocked += 3;
+          const statCounter = document.getElementById('stat-attacks-count');
+          if (statCounter) statCounter.innerText = State.attacksBlocked.toLocaleString();
+          appendTerminal(`
+            <div class="text-xs font-mono text-emerald-400">
+              <div>[✓] Deploying automated IP isolation rules to edge firewalls...</div>
+              <div>[✓] Quarantining 198.51.100.44 (Null-route injected).</div>
+              <div>[✓] Deploying WAF rate-limiting rule (Burst limit: 50 req/sec).</div>
+              <div class="font-bold text-cyan-300 mt-1">[SHIELD ENGAGED] All high-severity threats mitigated successfully.</div>
+            </div>
+          `);
+          break;
+
+        case 'decrypt':
+          const cipher = arg || 'SGVsbG8gQ3liZXJTaGllbGQ=';
+          try {
+            const decoded = atob(cipher);
+            appendTerminal(`
+              <div class="text-xs font-mono text-cyan-300">
+                <div>[*] Input Cipher: <span class="text-slate-300">${cipher}</span></div>
+                <div>[✓] Algorithm Detected: <span class="text-emerald-400 font-bold">Base64 Encoded Stream</span></div>
+                <div class="text-white font-bold mt-1">[DECODED PAYLOAD]: <span class="text-emerald-300">${escapeHtml(decoded)}</span></div>
+              </div>
+            `);
+          } catch (e) {
+            appendTerminal(`
+              <div class="text-xs font-mono text-rose-400">
+                [!] Error: Unable to decode input as standard Base64. Try: <span class="text-slate-300">decrypt SGVsbG8gQ3liZXJTaGllbGQ=</span>
+              </div>
+            `);
+          }
+          break;
+
+        case 'dashboard':
+          navigateTo('dashboard');
+          break;
+
+        case 'landing':
+          navigateTo('landing');
+          break;
+
+        case 'clear':
+          clearTerminal();
+          break;
+
+        default:
+          appendTerminal(`
+            <div class="text-xs font-mono text-rose-400">
+              Command not found: <span class="text-white">${escapeHtml(action)}</span>. Type <span class="text-emerald-400 font-bold">help</span> for command list.
+            </div>
+          `);
+          break;
+      }
+    }
+
+    if (terminalInput) {
+      terminalInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          handleTerminalSubmit();
+        }
+      });
+    }
+
+    // --- Modal Management & Feature Sub-Details ---
+    function openModal(type) {
+      const modal = document.getElementById('feature-modal');
+      const title = document.getElementById('modal-title');
+      const subtitle = document.getElementById('modal-subtitle');
+      const content = document.getElementById('modal-content');
+      const icon = document.getElementById('modal-icon-container');
+      if (!modal || !content) return;
+
+      modal.classList.remove('hidden');
+
+      if (type === 'phishing') {
+        title.innerText = 'Phishing Awareness Simulator';
+        subtitle.innerText = 'Interactive Header Analysis, Spoof Detection & Forensic Feedback';
+        icon.className = 'w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400';
+        icon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`;
+        
+        content.innerHTML = `
+          <div class="space-y-4 font-sans">
+            <!-- Email Client Header -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-2">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-slate-400 pb-2 border-b border-white/5 gap-2">
+                <div><span class="text-slate-500">FROM:</span> <span class="text-rose-400 font-bold">security-alert@service-paypal-verification.com</span></div>
+                <div class="text-[10px] text-slate-500">TODAY, 09:14 AM</div>
+              </div>
+              <div class="text-xs font-mono text-slate-300">
+                <span class="text-slate-500">TO:</span> victim_user@organization.corp
+              </div>
+              <div class="text-sm font-bold text-white">
+                SUBJECT: URGENT: Your PayPal account has been restricted due to 3 unauthorized logins
+              </div>
+            </div>
+
+            <!-- Email Body -->
+            <div class="p-5 rounded-xl bg-slate-950/60 border border-white/5 text-sm text-slate-200 space-y-3 leading-relaxed">
+              <p>Dear Customer,</p>
+              <p>We detected unusual activity on your account from an unrecognized IP address (Moscow, Russian Federation). To protect your funds, your access has been temporarily frozen.</p>
+              <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono">
+                ⚠️ WARNING: If you do not verify your identity within 2 hours, your account will be permanently deactivated.
+              </div>
+              <p>Please click below to confirm your password and card details immediately:</p>
+              <div class="py-2">
+                <span class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white font-mono text-xs cursor-pointer hover:bg-blue-500">
+                  Verify Account Now (https://secure-login-paypal.com/auth)
+                </span>
+                <span class="text-[11px] text-slate-400 block mt-1 font-mono">Hover destination: <span class="text-amber-400 underline">http://198.51.100.12/phish/harvest.php</span></span>
+              </div>
+            </div>
+
+            <!-- User Decision Controls -->
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <span class="text-xs font-mono text-slate-300">How would you classify this email?</span>
+              <div class="flex items-center gap-3 w-full sm:w-auto">
+                <button onclick="handlePhishingDecision('safe')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 border border-white/10">
+                  Mark as Safe
+                </button>
+                <button onclick="handlePhishingDecision('phishing')" class="flex-1 sm:flex-none px-5 py-2 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-xs font-mono text-rose-300 border border-rose-500/50 font-bold">
+                  🚨 Report as Phishing
+                </button>
+              </div>
+            </div>
+
+            <!-- Feedback Area -->
+            <div id="phishing-feedback" class="hidden"></div>
+          </div>
+        `;
+      } else if (type === 'attack') {
+        title.innerText = 'Attack & Defense Simulator';
+        subtitle.innerText = 'Interactive Cyber Warfare Node Network & Countermeasure Deployment';
+        icon.className = 'w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400';
+        icon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`;
+        
+        content.innerHTML = `
+          <div class="space-y-5 font-mono">
+            <!-- Scenario Selector -->
+            <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+              <span class="text-slate-400">CHOOSE ATTACK VECTOR:</span>
+              <div class="flex gap-2">
+                <button onclick="switchAttackMode('syn')" id="atk-btn-syn" class="px-3 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold">SYN Flood DDoS</button>
+                <button onclick="switchAttackMode('brute')" id="atk-btn-brute" class="px-3 py-1 rounded text-slate-400 hover:text-white bg-slate-900 border border-white/10">SSH Brute-Force</button>
+                <button onclick="switchAttackMode('sqli')" id="atk-btn-sqli" class="px-3 py-1 rounded text-slate-400 hover:text-white bg-slate-900 border border-white/10">SQL Injection</button>
+              </div>
+            </div>
+
+            <!-- Live Network Status Simulation Box -->
+            <div class="p-4 rounded-xl bg-slate-950/80 border border-emerald-500/30 space-y-3">
+              <div class="flex items-center justify-between text-xs pb-2 border-b border-white/5">
+                <span class="text-slate-400">TARGET: 10.0.4.15 (Production API Gateway)</span>
+                <span id="attack-status-badge" class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40 text-[10px] animate-pulse">
+                  UNDER ACTIVE ATTACK (84,200 req/sec)
+                </span>
+              </div>
+
+              <!-- Stream Logs -->
+              <div id="attack-logs-box" class="h-32 overflow-y-auto p-2 bg-slate-900/60 rounded text-[11px] text-slate-300 space-y-1">
+                <div class="text-rose-400">[ATTACK] IP 198.51.100.44 sending 5,000 TCP SYN packets with randomized spoofed sources.</div>
+                <div class="text-rose-400">[ATTACK] TCP backlog buffer at 89% capacity. Threat escalating.</div>
+                <div class="text-amber-400">[DETECTION] Anomaly detected: Connection flood exceeds threshold of 100 req/sec.</div>
+              </div>
+            </div>
+
+            <!-- Defensive Actions -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-3">
+              <div class="text-xs font-bold text-emerald-400 flex items-center justify-between">
+                <span>SELECT DEFENSIVE COUNTERMEASURE:</span>
+                <span class="text-slate-400 font-normal text-[11px]">Deploy instantly to node</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onclick="applyDefense('block_ip')" class="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-left border border-white/10 hover:border-emerald-400">
+                  <div class="font-bold text-white">1. Block Subnet</div>
+                  <div class="text-[10px] text-slate-400 mt-1">Null-route IP on BGP gateway</div>
+                </button>
+                <button onclick="applyDefense('enable_waf')" class="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-left border border-white/10 hover:border-emerald-400">
+                  <div class="font-bold text-white">2. Enable WAF Filter</div>
+                  <div class="text-[10px] text-slate-400 mt-1">Rate-limit to 50 req/min</div>
+                </button>
+                <button onclick="applyDefense('isolate')" class="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-left border border-white/10 hover:border-emerald-400">
+                  <div class="font-bold text-white">3. Isolate Node</div>
+                  <div class="text-[10px] text-slate-400 mt-1">Quarantine target VPC</div>
+                </button>
+              </div>
+            </div>
+
+            <div id="defense-result-box" class="hidden"></div>
+          </div>
+        `;
+      } else if (type === 'password') {
+        title.innerText = 'Password Security Checker';
+        subtitle.innerText = 'Zero-Knowledge Client-Side Entropy, Dictionary & Crack-Time Calculator';
+        icon.className = 'w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400';
+        icon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>`;
+        
+        content.innerHTML = `
+          <div class="space-y-5 font-mono">
+            <div class="p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-300">
+              🔒 PRIVACY NOTICE: Evaluated purely client-side in browser memory. Never transmitted over any network. Do NOT enter real passwords.
+            </div>
+
+            <!-- Password Input -->
+            <div class="space-y-2">
+              <label class="text-xs text-slate-300 font-bold">ENTER SAMPLE PASSWORD TO ANALYZE:</label>
+              <div class="flex items-center gap-3">
+                <input
+                  id="sample-password-input"
+                  type="text"
+                  oninput="analyzePasswordStrength(this.value)"
+                  value="CyberFortress#2026!"
+                  placeholder="type a password..."
+                  class="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-white/15 text-white font-mono text-sm focus:border-cyan-400 outline-none"
+                />
+                <button onclick="generateStrongPassphrase()" class="px-4 py-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 text-xs font-bold">
+                  GENERATE MEMORABLE
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Metrics Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs">
+                <span class="text-slate-400 block">ENTROPY BITS:</span>
+                <span id="pwd-entropy-val" class="text-lg font-bold text-purple-300">82.4 Bits</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs">
+                <span class="text-slate-400 block">CHARACTER POOL:</span>
+                <span id="pwd-charset-val" class="text-lg font-bold text-cyan-300">94 (Mixed Alpha+Num+Sym)</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs">
+                <span class="text-slate-400 block">ESTIMATED CRACK TIME:</span>
+                <span id="pwd-crack-val" class="text-lg font-bold text-emerald-400">~ 420,000 Centuries</span>
+              </div>
+            </div>
+
+            <!-- Security Check List -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-2 text-xs">
+              <div class="font-bold text-slate-300 mb-2">CRYPTOGRAPHIC CRITERIA CHECKLIST:</div>
+              <div id="pwd-crit-len" class="flex items-center gap-2 text-emerald-400">✓ Length: 17 Characters (Minimum 12+ recommended)</div>
+              <div id="pwd-crit-upper" class="flex items-center gap-2 text-emerald-400">✓ Contains Uppercase Letters</div>
+              <div id="pwd-crit-lower" class="flex items-center gap-2 text-emerald-400">✓ Contains Lowercase Letters</div>
+              <div id="pwd-crit-num" class="flex items-center gap-2 text-emerald-400">✓ Contains Numbers</div>
+              <div id="pwd-crit-sym" class="flex items-center gap-2 text-emerald-400">✓ Contains Special Symbols</div>
+            </div>
+          </div>
+        `;
+      } else if (type === 'mfa') {
+        title.innerText = 'MFA Demonstration Hub';
+        subtitle.innerText = 'Interactive Password vs Two-Factor Authentication Security Flow';
+        icon.className = 'w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400';
+        icon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`;
+        
+        content.innerHTML = `
+          <div class="space-y-5 font-mono text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Flow A: Password Only (Compromised) -->
+              <div class="p-4 rounded-xl bg-slate-900/60 border border-rose-500/30 space-y-3">
+                <div class="text-rose-400 font-bold text-sm flex items-center gap-1.5">
+                  <span>❌ SCENARIO A: PASSWORD ONLY</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed font-sans">
+                  If an attacker steals your password via phishing or data breaches, they gain <strong>100% unauthorized access</strong> immediately.
+                </p>
+                <div class="p-3 bg-slate-950 rounded border border-rose-500/20 text-rose-400">
+                  Password Stolen → Attacker Logs In → <strong>ACCOUNT BREACHED</strong>
+                </div>
+              </div>
+
+              <!-- Flow B: Password + MFA (Protected) -->
+              <div class="p-4 rounded-xl bg-slate-900/60 border border-emerald-500/30 space-y-3">
+                <div class="text-emerald-400 font-bold text-sm flex items-center gap-1.5">
+                  <span>🛡️ SCENARIO B: PASSWORD + TOTP MFA</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed font-sans">
+                  Even with the password, the attacker is completely blocked because they lack the physical 30-second cryptographic token.
+                </p>
+                <div class="p-3 bg-slate-950 rounded border border-emerald-500/20 text-emerald-400">
+                  Password Stolen → MFA Prompted → Missing Token → <strong>ACCESS BLOCKED</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Token Generator -->
+            <div class="p-5 rounded-xl bg-slate-950 border border-cyan-500/30 text-center space-y-3">
+              <span class="text-slate-400 block text-[11px]">VIRTUAL TOTP AUTHENTICATOR APP (RFC 6238)</span>
+              <div id="modal-totp-display" class="text-4xl font-bold font-mono tracking-widest text-cyan-400 text-glow-cyan">
+                ${State.totpCode}
+              </div>
+              <div class="text-slate-400 text-[11px]">
+                Token rotates in <span id="modal-totp-time" class="text-emerald-400 font-bold">${State.totpCountdown}s</span> • Time-synchronized
+              </div>
+              <div class="pt-2 flex items-center justify-center gap-3">
+                <button onclick="testMfaVerification(true)" class="px-5 py-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 text-emerald-300 font-bold">
+                  SIMULATE AUTHENTICATION HANDSHAKE
+                </button>
+              </div>
+            </div>
+
+            <div id="mfa-test-result" class="hidden"></div>
+          </div>
+        `;
+      } else if (type === 'soc') {
+        title.innerText = 'Mini SOC Dashboard & Incident Response';
+        subtitle.innerText = 'Enterprise SIEM Alert Triage Queue & Containment Workflow';
+        icon.className = 'w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400';
+        icon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`;
+        
+        content.innerHTML = `
+          <div class="space-y-4 font-mono text-xs">
+            <!-- Filter Bar -->
+            <div class="flex items-center justify-between text-slate-400 pb-2 border-b border-white/10">
+              <span>SIEM INCIDENT QUEUE (6 EVENTS)</span>
+              <div class="flex gap-2">
+                <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">Critical: 2</span>
+                <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">High: 2</span>
+                <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Medium: 2</span>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto rounded-xl border border-white/10 bg-slate-950/60">
+              <table class="w-full text-left">
+                <thead class="bg-slate-900/80 text-[11px] text-slate-400 border-b border-white/5">
+                  <tr>
+                    <th class="p-3">TIME</th>
+                    <th class="p-3">INCIDENT EVENT</th>
+                    <th class="p-3">SOURCE IP</th>
+                    <th class="p-3">SEVERITY</th>
+                    <th class="p-3">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5 text-[11px] text-slate-300">
+                  <tr class="hover:bg-slate-900/40">
+                    <td class="p-3 text-slate-400">09:15:22</td>
+                    <td class="p-3 font-bold text-white">SSH Brute-Force Dictionary</td>
+                    <td class="p-3 text-cyan-300">198.51.100.44</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-bold">CRITICAL</span></td>
+                    <td class="p-3"><button onclick="quarantineSocRow(this)" class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30">QUARANTINE</button></td>
+                  </tr>
+                  <tr class="hover:bg-slate-900/40">
+                    <td class="p-3 text-slate-400">09:22:04</td>
+                    <td class="p-3 font-bold text-white">Spear-Phishing Payload Attachment</td>
+                    <td class="p-3 text-cyan-300">203.0.113.88</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-bold">CRITICAL</span></td>
+                    <td class="p-3"><button onclick="quarantineSocRow(this)" class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30">QUARANTINE</button></td>
+                  </tr>
+                  <tr class="hover:bg-slate-900/40">
+                    <td class="p-3 text-slate-400">09:30:19</td>
+                    <td class="p-3 font-bold text-white">SQL Injection Attempt in /api/v1/users</td>
+                    <td class="p-3 text-cyan-300">192.0.2.14</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">HIGH</span></td>
+                    <td class="p-3"><button onclick="quarantineSocRow(this)" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30">BLOCK IP</button></td>
+                  </tr>
+                  <tr class="hover:bg-slate-900/40">
+                    <td class="p-3 text-slate-400">09:44:50</td>
+                    <td class="p-3 font-bold text-white">Abnormal Outbound Data Spike (2.4 GB)</td>
+                    <td class="p-3 text-cyan-300">10.0.1.55</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">HIGH</span></td>
+                    <td class="p-3"><button onclick="quarantineSocRow(this)" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30">INVESTIGATE</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      } else if (type === 'ctf') {
+        title.innerText = 'CyberFortress CTF Arena';
+        subtitle.innerText = 'Cryptographic Ciphers, Educational Challenges & Flag Submission';
+        icon.className = 'w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400';
+        icon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`;
+        
+        content.innerHTML = `
+          <div class="space-y-4 font-mono text-xs">
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-teal-500/30 space-y-2">
+              <div class="flex items-center justify-between text-teal-400 font-bold">
+                <span>CHALLENGE #01: INTERCEPTED EXFILTRATION STREAM</span>
+                <span class="text-indigo-300">+50 XP</span>
+              </div>
+              <p class="text-slate-300 font-sans">
+                A compromised workstation tried sending an encoded transmission. Can you decipher the payload and submit the flag?
+              </p>
+              <div class="p-3 rounded bg-slate-950 border border-white/10 text-cyan-300 break-all select-all font-mono">
+                ENCODED CIPHER: Q1lCRVJ7c2hpZWxkX2FjdGl2ZV9kZWZlbnNlXzIwMjZ9
+              </div>
+              <div class="pt-1 flex gap-2">
+                <button onclick="autoSolveCipher()" class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-[11px]">
+                  TEST BASE64 DECODER
+                </button>
+              </div>
+            </div>
+
+            <!-- Flag Input -->
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-white/10 space-y-3">
+              <label class="text-xs text-slate-300 font-bold">SUBMIT CAPTURED FLAG:</label>
+              <div class="flex items-center gap-3">
+                <input
+                  id="ctf-flag-input"
+                  type="text"
+                  placeholder="CS{flag_here}..."
+                  class="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 text-white font-mono text-sm focus:border-teal-400 outline-none"
+                />
+                <button onclick="submitFlag()" class="px-5 py-2.5 rounded-xl bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/50 text-teal-300 font-bold">
+                  SUBMIT FLAG
+                </button>
+              </div>
+            </div>
+
+            <div id="ctf-result-box" class="hidden"></div>
+          </div>
+        `;
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('feature-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // Modal Interactive Handlers
+    function handlePhishingDecision(decision) {
+      const feedback = document.getElementById('phishing-feedback');
+      if (!feedback) return;
+      feedback.classList.remove('hidden');
+
+      if (decision === 'phishing') {
+        SoundFx.play('access');
+        State.xp += 25;
+        updateXpDisplay();
+        feedback.className = 'p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 text-xs font-mono space-y-2';
+        feedback.innerHTML = `
+          <div class="font-bold text-sm text-emerald-300">✅ 100% CORRECT! PHISHING THREAT NEUTRALIZED (+25 XP)</div>
+          <div>Key Indicators You Successfully Identified:</div>
+          <div>• <strong>Deceptive Domain:</strong> @service-paypal-verification.com is NOT paypal.com.</div>
+          <div>• <strong>Urgency Manipulation:</strong> Artificial 2-hour deadline to induce panic.</div>
+          <div>• <strong>Spoofed Link:</strong> Destination points to an unverified IP address credential harvester.</div>
+        `;
+      } else {
+        SoundFx.play('alert');
+        feedback.className = 'p-4 rounded-xl bg-rose-500/20 border border-rose-500/50 text-rose-300 text-xs font-mono space-y-2';
+        feedback.innerHTML = `
+          <div class="font-bold text-sm text-rose-400">❌ CAUTION: THAT WAS A PHISHING ATTACK!</div>
+          <div>Review the sender address carefully (@service-paypal-verification.com). Genuine PayPal notifications will always arrive from paypal.com.</div>
+        `;
+      }
+    }
+
+    function switchAttackMode(mode) {
+      SoundFx.play('click');
+      const badge = document.getElementById('attack-status-badge');
+      const logs = document.getElementById('attack-logs-box');
+      if (!badge || !logs) return;
+
+      if (mode === 'syn') {
+        badge.innerText = 'UNDER ACTIVE ATTACK (84,200 req/sec)';
+        badge.className = 'px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40 text-[10px] animate-pulse';
+        logs.innerHTML = `
+          <div class="text-rose-400">[ATTACK] IP 198.51.100.44 sending 5,000 TCP SYN packets with randomized spoofed sources.</div>
+          <div class="text-rose-400">[ATTACK] TCP backlog buffer at 89% capacity. Threat escalating.</div>
+        `;
+      } else if (mode === 'brute') {
+        badge.innerText = 'SSH DICTIONARY PROBE (320 tries/sec)';
+        badge.className = 'px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] animate-pulse';
+        logs.innerHTML = `
+          <div class="text-amber-400">[ATTACK] Repeated failed login attempts on root@target.host via Port 22.</div>
+          <div class="text-amber-400">[DETECTION] 50 consecutive failed authentications in 4 seconds.</div>
+        `;
+      } else {
+        badge.innerText = 'SQLi EXPLOIT INJECTION';
+        badge.className = 'px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40 text-[10px] animate-pulse';
+        logs.innerHTML = `
+          <div class="text-rose-400">[ATTACK] Malicious query payload: ' OR 1=1; DROP TABLE users; --</div>
+          <div class="text-amber-400">[DETECTION] Regex signature matched SQL meta-characters.</div>
+        `;
+      }
+    }
+
+    function applyDefense(type) {
+      SoundFx.play('access');
+      const res = document.getElementById('defense-result-box');
+      const badge = document.getElementById('attack-status-badge');
+      if (!res) return;
+      res.classList.remove('hidden');
+      res.className = 'p-3 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono';
+
+      if (badge) {
+        badge.innerText = 'MITIGATED // TRAFFIC NORMAL (42 req/sec)';
+        badge.className = 'px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px]';
+      }
+
+      State.attacksBlocked += 1;
+      State.xp += 20;
+      updateXpDisplay();
+
+      res.innerHTML = `
+        <div class="font-bold text-emerald-300">✓ DEFENSE PROTOCOL ACTIVE (+20 XP)</div>
+        <div>Offending malicious packets dropped at perimeter. Target server response time normalized to 14ms.</div>
+      `;
+    }
+
+    function analyzePasswordStrength(val) {
+      const entropyEl = document.getElementById('pwd-entropy-val');
+      const crackEl = document.getElementById('pwd-crack-val');
+      const charsetEl = document.getElementById('pwd-charset-val');
+      if (!entropyEl || !crackEl || !charsetEl) return;
+
+      let pool = 0;
+      if (/[a-z]/.test(val)) pool += 26;
+      if (/[A-Z]/.test(val)) pool += 26;
+      if (/[0-9]/.test(val)) pool += 10;
+      if (/[^a-zA-Z0-9]/.test(val)) pool += 32;
+      if (pool === 0) pool = 1;
+
+      const entropy = Math.round(val.length * Math.log2(pool));
+      entropyEl.innerText = `${entropy} Bits`;
+      charsetEl.innerText = `${pool} Character Set`;
+
+      if (entropy < 30) {
+        crackEl.innerText = '< 1 Millisecond (INSTANT CRACK)';
+        crackEl.className = 'text-lg font-bold text-rose-400';
+      } else if (entropy < 55) {
+        crackEl.innerText = '~ 3 Hours (VULNERABLE)';
+        crackEl.className = 'text-lg font-bold text-amber-400';
+      } else if (entropy < 70) {
+        crackEl.innerText = '~ 45 Years (STRONG)';
+        crackEl.className = 'text-lg font-bold text-cyan-300';
+      } else {
+        crackEl.innerText = '~ 420,000 Centuries (BULLETPROOF)';
+        crackEl.className = 'text-lg font-bold text-emerald-400';
+      }
+    }
+
+    function generateStrongPassphrase() {
+      SoundFx.play('click');
+      const words = ['Obsidian', 'Falcon', 'Sentinel', 'Quantum', 'Nebula', 'Vortex', 'Cyber', 'Shield'];
+      const p1 = words[Math.floor(Math.random() * words.length)];
+      const p2 = words[Math.floor(Math.random() * words.length)];
+      const num = Math.floor(10 + Math.random() * 89);
+      const pass = `${p1}-${p2}!${num}#`;
+      const input = document.getElementById('sample-password-input');
+      if (input) {
+        input.value = pass;
+        analyzePasswordStrength(pass);
+      }
+    }
+
+    function testMfaVerification() {
+      SoundFx.play('access');
+      const res = document.getElementById('mfa-test-result');
+      if (!res) return;
+      res.classList.remove('hidden');
+      res.className = 'p-3 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono';
+      res.innerHTML = `
+        <div class="font-bold text-emerald-300">✓ CRYPTOGRAPHIC TOKEN VERIFIED // SESSION GRANTED</div>
+        <div>HMAC-SHA1 time-step valid. Zero Trust compliance achieved. Attack vector eliminated.</div>
+      `;
+      State.xp += 15;
+      updateXpDisplay();
+    }
+
+    function quarantineSocRow(btn) {
+      SoundFx.play('access');
+      btn.innerText = 'QUARANTINED';
+      btn.className = 'px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold';
+      btn.disabled = true;
+      State.attacksBlocked += 1;
+      const statCounter = document.getElementById('stat-attacks-count');
+      if (statCounter) statCounter.innerText = State.attacksBlocked.toLocaleString();
+    }
+
+    function autoSolveCipher() {
+      SoundFx.play('click');
+      const input = document.getElementById('ctf-flag-input');
+      if (input) {
+        input.value = 'CS{shield_active_defense_2026}';
+      }
+    }
+
+    function submitFlag() {
+      const input = document.getElementById('ctf-flag-input');
+      const res = document.getElementById('ctf-result-box');
+      if (!input || !res) return;
+      const val = input.value.trim();
+      res.classList.remove('hidden');
+
+      if (val === 'CS{shield_active_defense_2026}' || val.toLowerCase().includes('shield_active_defense')) {
+        SoundFx.play('access');
+        State.xp += 50;
+        updateXpDisplay();
+        res.className = 'p-3 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono space-y-1';
+        res.innerHTML = `
+          <div class="font-bold text-emerald-300">🎉 CONGRATULATIONS! FLAG VERIFIED (+50 XP)</div>
+          <div>Flag <code>CS{shield_active_defense_2026}</code> successfully captured. Leaderboard rank updated!</div>
+        `;
+      } else {
+        SoundFx.play('alert');
+        res.className = 'p-3 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-mono';
+        res.innerHTML = `
+          <div class="font-bold text-rose-400">❌ INCORRECT FLAG</div>
+          <div>Decode the Base64 cipher above to recover the hidden key.</div>
+        `;
+      }
+    }
+
+    function updateXpDisplay() {
+      const xpEl = document.getElementById('stat-xp-count');
+      const barEl = document.getElementById('stat-xp-bar');
+      if (xpEl) xpEl.innerText = `${State.xp} XP`;
+      if (barEl) {
+        const pct = Math.min(100, Math.round((State.xp / 1000) * 100));
+        barEl.style.width = `${pct}%`;
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // --- Background Procedural Cyber Canvas Fallback ---
+    (function initCyberCanvas() {
+      const canvas = document.getElementById('cyber-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const particles = [];
+      for (let i = 0; i < 45; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 2 + 1,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.3)';
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 110) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
+</body>
+</html>

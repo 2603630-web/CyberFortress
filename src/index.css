@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #060b14;
+    --card-bg: #0d1527;
+    --card-border: #16243f;
+    --cyan: #19c7f3;
+    --cyan-glow: rgba(25, 199, 243, 0.35);
+    --violet: #7c5cfc;
+    --pink: #ff2e93;
+    --emerald: #20d6a1;
+    --amber: #f59e0b;
+    --danger: #ff6577;
+  }
+
+  body {
+    background-color: #050a14;
+    color: #e2e8f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom Tech Fonts */
+  .font-mono-tech {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .font-display {
+    font-family: 'Rajdhani', sans-serif;
+  }
+}
+
+/* Glowing cyberpunk borders and glassmorphism */
+.cyber-card {
+  background: rgba(13, 21, 39, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(25, 199, 243, 0.15);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), inset 0 0 2px 1px rgba(25, 199, 243, 0.1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card:hover {
+  border-color: rgba(25, 199, 243, 0.5);
+  box-shadow: 0 15px 40px -5px rgba(25, 199, 243, 0.3), inset 0 0 4px 1px rgba(25, 199, 243, 0.25);
+  transform: translateY(-3px);
+}
+
+.cyber-card-active {
+  background: rgba(16, 28, 52, 0.95);
+  border: 1px solid rgba(25, 199, 243, 0.6);
+  box-shadow: 0 0 30px -4px rgba(25, 199, 243, 0.4), inset 0 0 3px 1px rgba(25, 199, 243, 0.3);
+}
+
+.cyber-card-danger {
+  background: rgba(30, 14, 24, 0.88);
+  border: 1px solid rgba(255, 101, 119, 0.45);
+  box-shadow: 0 0 25px -3px rgba(255, 101, 119, 0.3);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080f1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1b2c4e;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #19c7f3;
+  box-shadow: 0 0 10px #19c7f3;
+}
+
+/* Pulse radar animation */
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar {
+  animation: radar-sweep 4s linear infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Glow pulse animation */
+@keyframes neon-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(25, 199, 243, 0.6));
+  }
+  50% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 5px rgba(25, 199, 243, 0.3));
+  }
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+
+/* Scanline effect */
+.scanline {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+}
+
+/* Ambient glow pulses */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
