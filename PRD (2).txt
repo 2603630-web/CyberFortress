@@ -1,0 +1,625 @@
+CYBERFORTRESS
+
+Product Requirements Document (PRD)
+
+Project Title: CyberFortress — Interactive Cyber Attack Detection, Simulation & Awareness Platform
+
+Project Type: ICT Semester Project
+
+Academic Program: BS Cybersecurity — First Semester
+
+Team Size: 3 Members
+
+Technology Stack: HTML, CSS, JavaScript, Python Flask, SQLite, Chart.js, Git and GitHub
+
+Document Version: 1.0
+
+---
+
+1. Product Overview
+
+1.1 Introduction
+
+CyberFortress is an interactive cybersecurity educational platform designed to help users understand common cyber threats, experience controlled attack simulations, and learn practical defensive techniques.
+
+The platform combines cybersecurity awareness, interactive demonstrations, security monitoring, and beginner-friendly challenges in one web application.
+
+Instead of simply providing theoretical cybersecurity information, CyberFortress allows users to interact with different cybersecurity tools and understand how attacks happen and how they can be prevented.
+
+1.2 Problem Statement
+
+Cybersecurity threats such as phishing, weak passwords, unauthorized access, and suspicious network activities are becoming increasingly common.
+
+Many beginners understand cybersecurity concepts theoretically but lack opportunities to explore them through practical demonstrations.
+
+CyberFortress addresses this problem by providing a safe, interactive learning environment where users can:
+
+- Recognize phishing attempts.
+- Understand attack and defense mechanisms.
+- Evaluate password strength.
+- Learn about Multi-Factor Authentication.
+- Explore security alerts through a Mini SOC Dashboard.
+- Test their cybersecurity knowledge through CTF challenges.
+
+1.3 Product Vision
+
+To create a professional, interactive cybersecurity learning platform that makes cybersecurity concepts understandable through practical demonstrations, simulations, and challenges.
+
+1.4 Main Objectives
+
+1. Develop an interactive cybersecurity web application.
+2. Educate users about common cyber threats.
+3. Demonstrate basic attack detection and defense techniques.
+4. Provide practical cybersecurity learning experiences.
+5. Integrate frontend, backend, database, and data visualization technologies.
+6. Develop a professional portfolio-worthy project.
+7. Demonstrate teamwork and practical programming skills.
+
+---
+
+2. Target Users
+
+The primary target users are:
+
+- University cybersecurity students.
+- Beginners learning cybersecurity.
+- Students interested in ethical hacking and digital security.
+- Users who want to improve their cybersecurity awareness.
+
+The platform is designed for educational use and does not require advanced cybersecurity knowledge.
+
+---
+
+3. Core Features and Functional Requirements
+
+CyberFortress will contain six main modules.
+
+FEATURE 1: Phishing Awareness Simulator
+
+Purpose: Help users identify phishing emails and understand how phishing attacks deceive people.
+
+Functional Requirements
+
+- Display sample phishing and legitimate emails.
+- Show sender information, subject, and message content.
+- Allow users to identify suspicious messages.
+- Provide options to classify an email as phishing or legitimate.
+- Display correct or incorrect feedback.
+- Explain phishing indicators such as suspicious links, urgency, and misleading senders.
+- Calculate the user's quiz score.
+- Optionally store quiz results in SQLite.
+
+Expected Outcome
+
+Users should understand how to recognize suspicious emails and avoid common phishing techniques.
+
+FEATURE 2: Attack & Defense Simulator
+
+Purpose: Demonstrate how common cyber attacks happen and how defensive security controls can reduce their impact.
+
+Functional Requirements
+
+- Provide predefined attack scenarios.
+- Display attack stages step by step.
+- Show simulated attacker and defender activities.
+- Allow users to select defensive controls.
+- Demonstrate the outcome of applying or not applying a security control.
+- Explain the purpose of firewalls, authentication, monitoring, and other defenses.
+- Display the final simulation result.
+
+Example Scenarios
+
+- Phishing incident.
+- Weak password attack.
+- Unauthorized login attempt.
+- Basic network intrusion scenario.
+
+Expected Outcome
+
+Users should understand the relationship between cyber attacks, vulnerabilities, security controls, and defensive responses.
+
+All attack scenarios must remain controlled simulations using sample data.
+
+FEATURE 3: Password Security Checker
+
+Purpose: Help users understand password strength and improve their password security practices.
+
+Functional Requirements
+
+- Provide a password input field.
+- Include a show/hide password option.
+- Evaluate basic password characteristics.
+- Check password length.
+- Check character variety.
+- Identify common or predictable password examples.
+- Display a strength indicator.
+- Provide recommendations for improving password security.
+
+Expected Outcome
+
+Users should learn how to create stronger, longer, and less predictable passwords.
+
+Passwords entered into the educational checker must not be stored in SQLite or exposed in server logs.
+
+FEATURE 4: MFA Demonstration
+
+Purpose: Demonstrate how Multi-Factor Authentication adds another layer of security to user authentication.
+
+Functional Requirements
+
+- Create a simulated login interface.
+- Demonstrate password-based authentication.
+- Introduce a second verification step.
+- Provide a simulated OTP or verification code.
+- Display successful and unsuccessful verification outcomes.
+- Explain different authentication factors.
+- Compare password-only authentication with MFA.
+
+Expected Outcome
+
+Users should understand how MFA works and why additional authentication factors improve account protection.
+
+The prototype will use predefined demonstration credentials and simulated verification rather than connecting to real accounts.
+
+FEATURE 5: Mini SOC Dashboard
+
+Purpose: Provide a simplified Security Operations Center interface for monitoring and analyzing simulated security events.
+
+Functional Requirements
+
+- Display security event statistics.
+- Show a security event log table.
+- Display event timestamps.
+- Categorize alerts by severity.
+- Include alert statuses such as Open, Investigating, and Reviewed.
+- Provide event filtering.
+- Display charts using Chart.js.
+- Show different categories of simulated security incidents.
+- Connect event data to SQLite.
+
+Dashboard Components
+
+1. Total security events.
+2. High-severity alerts.
+3. Reviewed events.
+4. Security event table.
+5. Event severity chart.
+6. Security event category chart.
+7. Alert investigation details.
+
+Expected Outcome
+
+Users should understand how security analysts monitor events, identify suspicious activity, and investigate security alerts.
+
+The dashboard will use sample events and events generated by the other CyberFortress simulations. It will not claim to monitor a real network.
+
+FEATURE 6: CyberFortress CTF Challenges
+
+Purpose: Improve users' cybersecurity knowledge through beginner-friendly Capture the Flag challenges.
+
+Functional Requirements
+
+- Display a list of available challenges.
+- Provide challenge descriptions and instructions.
+- Include different difficulty levels.
+- Allow users to submit answers.
+- Validate answers through Flask.
+- Provide hints and explanations.
+- Award points for correct answers.
+- Track user progress.
+- Store challenge scores in SQLite.
+- Optionally provide a leaderboard.
+
+Example Challenges
+
+1. Identify phishing indicators.
+2. Password security challenge.
+3. Basic Caesar cipher decoding.
+4. Security log investigation.
+
+Expected Outcome
+
+Users should improve their cybersecurity knowledge through interactive problem-solving activities.
+
+---
+
+4. Technology Stack
+
+Frontend
+
+HTML: Provides the structure of the website.
+
+CSS: Controls the visual appearance, layout, colors, and responsive design.
+
+JavaScript: Handles interactive elements, simulations, password checks, quiz logic, and dynamic updates.
+
+Backend
+
+Python: Provides backend programming logic.
+
+Flask: Handles routes, user requests, answer validation, and communication between frontend and database.
+
+Database
+
+SQLite: Stores appropriate information such as quiz results, CTF scores, and simulated security event records.
+
+Data Visualization
+
+Chart.js: Creates interactive charts and graphs for the Mini SOC Dashboard.
+
+Version Control
+
+Git: Tracks code changes and supports development collaboration.
+
+GitHub: Hosts the project repository and supports team collaboration.
+
+---
+
+5. System Architecture
+
+The system will follow a simple three-layer architecture.
+
+Layer 1: Presentation Layer
+
+HTML, CSS, JavaScript.
+
+Responsible for:
+
+- User interface.
+- Navigation.
+- Forms and buttons.
+- Interactive simulations.
+- Dashboard visualization.
+
+Layer 2: Application Layer
+
+Python and Flask.
+
+Responsible for:
+
+- Processing requests.
+- Validating user submissions.
+- Managing simulation logic.
+- Calculating scores.
+- Communicating with SQLite.
+
+Layer 3: Data Layer
+
+SQLite.
+
+Responsible for:
+
+- Saving quiz results.
+- Saving CTF scores.
+- Storing simulated security events.
+- Maintaining appropriate application records.
+
+Chart.js will visualize the processed security-event information in the frontend.
+
+---
+
+6. Team Structure and Task Distribution
+
+The project will be developed by three members with clearly defined responsibilities.
+
+MEMBER 1 — Frontend Developer & UI Designer
+
+Primary Responsibility: Website design and frontend development.
+
+Assigned Tasks
+
+1. Design the CyberFortress homepage.
+2. Create the navigation bar and shared website layout.
+3. Develop the Phishing Awareness Simulator interface.
+4. Develop the Password Security Checker interface.
+5. Implement frontend interactions using JavaScript.
+6. Make the website responsive.
+7. Maintain consistent colors, typography, icons, and spacing.
+
+Technologies
+
+- HTML
+- CSS
+- JavaScript
+
+Deliverables
+
+- Homepage.
+- Navigation system.
+- Phishing Simulator frontend.
+- Password Checker frontend.
+- Shared UI components.
+- Responsive website design.
+
+MEMBER 2 — Backend Developer & Database Manager
+
+Primary Responsibility: Backend functionality and database integration.
+
+Assigned Tasks
+
+1. Set up the Flask application.
+2. Develop the backend routes.
+3. Implement the Attack & Defense Simulator logic.
+4. Implement the MFA Demonstration logic.
+5. Create and configure the SQLite database.
+6. Connect frontend forms to backend routes.
+7. Implement answer validation.
+8. Manage appropriate database records.
+9. Handle errors and backend validation.
+
+Technologies
+
+- Python
+- Flask
+- SQLite
+- JavaScript integration
+
+Deliverables
+
+- Flask backend.
+- Database structure.
+- Attack & Defense Simulator functionality.
+- MFA Demonstration functionality.
+- Backend validation.
+- Database integration.
+
+MEMBER 3 — SOC Dashboard, CTF & Integration Developer
+
+Primary Responsibility: Security monitoring, challenges, and application testing.
+
+Assigned Tasks
+
+1. Develop the Mini SOC Dashboard.
+2. Create simulated security event data.
+3. Implement security event tables and filters.
+4. Develop Chart.js visualizations.
+5. Develop CyberFortress CTF Challenges.
+6. Implement challenge scoring and answer validation with the backend developer.
+7. Integrate dashboard data with SQLite.
+8. Perform functional testing.
+9. Prepare technical documentation and project screenshots.
+
+Technologies
+
+- HTML
+- CSS
+- JavaScript
+- Chart.js
+- Python/Flask integration
+- SQLite
+
+Deliverables
+
+- Mini SOC Dashboard.
+- Security event visualization.
+- CTF Challenges.
+- Scoring system.
+- Testing documentation.
+- Project screenshots and technical documentation.
+
+Shared Responsibilities
+
+All three members must:
+
+- Participate in project planning.
+- Use Git and GitHub.
+- Review each other's code.
+- Test the complete application.
+- Help fix integration problems.
+- Understand all six features.
+- Participate in the final presentation.
+
+No feature should be considered complete until it works with the rest of the application.
+
+---
+
+7. User Interface Requirements
+
+CyberFortress should have a professional cybersecurity-themed design.
+
+Design Direction
+
+- Dark navy background.
+- Blue and teal accent colors.
+- Modern typography.
+- Professional cybersecurity icons.
+- Consistent cards and dashboard components.
+- Clear navigation.
+- Responsive design.
+
+Main Pages
+
+1. Homepage / Main Dashboard.
+2. Phishing Awareness Simulator.
+3. Attack & Defense Simulator.
+4. Password Security Checker.
+5. MFA Demonstration.
+6. Mini SOC Dashboard.
+7. CTF Challenges.
+
+The homepage will act as the central navigation point for all six modules.
+
+---
+
+8. Database Requirements
+
+SQLite will be used to store application information.
+
+Suggested database tables:
+
+1. quiz_results
+
+- result_id
+- quiz_type
+- score
+- completion_date
+
+2. security_events
+
+- event_id
+- event_type
+- severity
+- description
+- event_status
+- timestamp
+
+3. ctf_challenges
+
+- challenge_id
+- challenge_title
+- description
+- difficulty
+- points
+
+4. ctf_scores
+
+- score_id
+- challenge_id
+- score
+- completion_date
+
+5. simulation_results
+
+- simulation_id
+- scenario_type
+- selected_defense
+- simulation_outcome
+- completion_date
+
+The exact schema may be adjusted during implementation.
+
+Passwords, authentication secrets, and private credentials must not be stored as plain text.
+
+---
+
+9. Development Roadmap
+
+Phase 1 — Project Setup
+
+- Finalize requirements.
+- Create the GitHub repository.
+- Set up the project folder structure.
+- Configure Python and Flask.
+- Create the initial homepage.
+
+Phase 2 — Frontend Development
+
+- Develop navigation.
+- Design shared layouts.
+- Build the feature pages.
+- Apply responsive styling.
+
+Phase 3 — Feature Development
+
+- Develop Phishing Awareness Simulator.
+- Develop Password Security Checker.
+- Develop Attack & Defense Simulator.
+- Develop MFA Demonstration.
+- Develop Mini SOC Dashboard.
+- Develop CTF Challenges.
+
+Phase 4 — Backend and Database Integration
+
+- Configure Flask routes.
+- Create SQLite database tables.
+- Implement answer validation.
+- Connect frontend forms.
+- Store appropriate results.
+
+Phase 5 — Integration
+
+- Connect all six features.
+- Connect simulation-generated events to the SOC dashboard.
+- Verify navigation and data flow.
+- Resolve conflicts and errors.
+
+Phase 6 — Testing
+
+- Test all buttons and interactions.
+- Test successful and unsuccessful submissions.
+- Check database operations.
+- Review responsive design.
+- Perform basic security checks.
+
+Phase 7 — Finalization
+
+- Complete README documentation.
+- Add project screenshots.
+- Prepare architecture diagrams.
+- Prepare the final demonstration.
+- Review GitHub repository quality.
+
+---
+
+10. Non-Functional Requirements
+
+CyberFortress should satisfy the following quality requirements:
+
+1. Usability: Beginners should understand the interface without advanced technical knowledge.
+2. Performance: Pages and basic interactions should respond smoothly.
+3. Reliability: The application should handle invalid inputs without crashing.
+4. Security: Input validation and safe data-handling practices must be followed.
+5. Maintainability: Code should be organized into understandable files and modules.
+6. Compatibility: The application should support modern desktop and mobile browsers.
+7. Scalability: Additional educational modules should be possible in future versions.
+
+---
+
+11. Project Scope and Limitations
+
+Included in the project
+
+- Six interactive cybersecurity modules.
+- Simulated attack and defense scenarios.
+- Password security evaluation.
+- Simulated MFA.
+- Mini SOC monitoring dashboard.
+- Beginner CTF challenges.
+- SQLite database integration.
+- Educational feedback and scoring.
+
+Not included in the initial version
+
+- Real-world network intrusion detection.
+- Actual penetration testing against external systems.
+- Real phishing campaigns.
+- Production authentication services.
+- Live threat intelligence feeds.
+- Enterprise-grade SOC infrastructure.
+
+These can be considered future improvements if the team has sufficient time and resources.
+
+---
+
+12. Project Success Criteria
+
+CyberFortress will be considered successfully implemented when:
+
+1. All six features are accessible through the main interface.
+2. Each feature performs its intended function.
+3. Interactive elements provide appropriate feedback.
+4. Flask processes the required backend operations.
+5. SQLite saves the intended application records.
+6. Chart.js visualizes simulated security events.
+7. The application works without critical errors.
+8. All three team members can explain their contributions.
+9. The GitHub repository contains organized source code and documentation.
+10. The team can successfully demonstrate the complete application.
+
+---
+
+13. Expected Project Outcome
+
+CyberFortress will provide an interactive educational cybersecurity platform where users can understand common cyber threats, practice defensive security concepts, investigate simulated security events, and improve their cybersecurity knowledge through practical challenges.
+
+---
+
+14. Conclusion
+
+CyberFortress combines web development and fundamental cybersecurity concepts into one practical educational application.
+
+Through six integrated features, the project aims to transform theoretical cybersecurity knowledge into an interactive learning experience.
+
+The project will also provide the three team members with practical experience in frontend development, backend programming, database management, data visualization, software collaboration, and cybersecurity awareness.
+
+Project Motto: Learn. Simulate. Detect. Defend.
