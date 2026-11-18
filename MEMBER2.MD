@@ -1,33 +1,41 @@
-# Member 2 — Backend Developer & Database Manager
+# MEMBER 2 — Backend Developer & Database Manager
 
 **Project Name:** CyberFortress  
+**Source:** PRD (2).txt (Section 6)  
 **Role:** Backend Developer & Database Manager  
 
 ---
 
 ## 1. Primary Responsibility
-Backend functionality, server routing, database configuration, security monitoring logic, and system testing.
+Backend functionality and database integration.
 
 ---
 
 ## 2. Assigned Tasks
-1. **Flask Server Setup:** Set up the Python Flask application structure, server configuration, and environment handling.
-2. **Backend Routes:** Develop all necessary Flask API endpoints and page routes.
-3. **Attack & Defense Simulator Logic:** Implement backend logic and state management for the Attack & Defense Simulator.
-4. **SQLite Database Configuration:** Create and configure the SQLite database schema (`cyberFortress.db`) and required tables (`quiz_results`, `simulation_results`, `security_events`, etc.).
-5. **Answer Validation:** Implement robust backend answer validation and scoring logic.
-6. **Mini SOC Dashboard:** Implement the backend routes and data handling for the Mini SOC Dashboard interface.
-7. **Simulated Security Events:** Generate and manage realistic simulated security event data in the database.
-8. **Real-time Threat & Alert Triage:** Implement backend mechanisms for handling, filtering, and triaging simulated real-time threats and security alerts.
-9. **Functional Testing:** Perform comprehensive functional testing of backend routes, database operations, and simulation responses.
+1. Set up the Flask application.
+2. Develop the backend routes.
+3. Implement the Attack & Defense Simulator logic.
+4. Implement the MFA Demonstration logic.
+5. Create and configure the SQLite database.
+6. Connect frontend forms to backend routes.
+7. Implement answer validation.
+8. Manage appropriate database records.
+9. Handle errors and backend validation.
 
 ---
 
-## 3. Deliverables
-- Flask backend application (`app.py`).
-- SQLite database configuration and schema scripts.
-- Attack & Defense Simulator backend logic.
-- Answer validation and scoring engine.
-- Mini SOC Dashboard backend integration.
-- Simulated security events and real-time alert triage system.
-- Functional testing documentation and verification reports.
+## 3. Technologies
+- Python
+- Flask
+- SQLite
+- JavaScript integration
+
+---
+
+## 4. Deliverables
+- Flask backend.
+- Database structure.
+- Attack & Defense Simulator functionality.
+- MFA Demonstration functionality.
+- Backend validation.
+- Database integration.
