@@ -53,6 +53,20 @@ export interface SecurityEvent {
   details: string;
 }
 
+export interface CtfChallenge {
+  id: string;
+  title: string;
+  category: 'Cryptography' | 'Log Forensics' | 'Phishing Analysis' | 'Security Quiz';
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  points: number;
+  description: string;
+  prompt: string;
+  hint: string;
+  correctFlag: string;
+  explanation: string;
+  isSolved?: boolean;
+}
+
 export interface ModuleMetadata {
   id: ModuleId;
   title: string;
@@ -66,3 +80,4 @@ export interface ModuleMetadata {
   overview: string;
   keyFeatures: string[];
 }
+

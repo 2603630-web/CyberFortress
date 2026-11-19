@@ -1,4 +1,4 @@
-import { PhishingEmail, ModuleMetadata, SecurityEvent, UserStats } from '../types';
+import { PhishingEmail, ModuleMetadata, SecurityEvent, UserStats, CtfChallenge } from '../types';
 
 export const initialUserStats: UserStats = {
   securityScore: 82,
@@ -108,8 +108,8 @@ export const modulesList: ModuleMetadata[] = [
     title: 'CyberFortress CTF Challenge Arena',
     shortDesc: 'Gamified puzzle arena with flag submissions, cipher decoders, mock log forensics, and leaderboard.',
     iconName: 'Trophy',
-    badge: 'COMING SOON',
-    status: 'COMING_SOON',
+    badge: 'LIVE DEMO AVAILABLE',
+    status: 'ACTIVE',
     estimatedDuration: '25 Mins',
     difficulty: 'Intermediate',
     tags: ['Capture The Flag', 'Forensics', 'Cryptography'],
@@ -373,4 +373,55 @@ export const threatTrendData = [
   { time: '9:40', value: 11900, critical: 240, blocked: 11550 },
   { time: '9:50', value: 14700, critical: 430, blocked: 14150 },
   { time: '10:00', value: 16800, critical: 580, blocked: 16100 }
+];
+
+export const mockCtfChallenges: CtfChallenge[] = [
+  {
+    id: 'ctf-1',
+    title: 'Base64 Decryption Challenge',
+    category: 'Cryptography',
+    difficulty: 'Beginner',
+    points: 25,
+    description: 'An intercepted network packet contained an obfuscated authentication token encoded in Base64.',
+    prompt: 'Decode the following Base64 string to retrieve the hidden flag: `Q3N7Q3liZXJGb3J0cmVzc0Jhc2U2NF9EZWNvZGVkfQ==`',
+    hint: 'Use a standard Base64 decoder or JavaScript atob() function.',
+    correctFlag: 'CS{CyberFortressBase64_Decoded}',
+    explanation: 'Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. Decoding the ciphertext reveals the plain text flag.'
+  },
+  {
+    id: 'ctf-2',
+    title: 'Log Forensics: Brute Force Detection',
+    category: 'Log Forensics',
+    difficulty: 'Intermediate',
+    points: 40,
+    description: 'Analyze the SSH authentication logs of the bastion gateway to find the attacker’s successful password guess or flag indicator.',
+    prompt: 'Examine the logs:\n`10:01:21 SSH Failed root (185.220.101.4)`\n`10:01:25 SSH Failed root (185.220.101.4)`\n`10:01:30 SSH SUCCESS root (185.220.101.4) [Flag: CS{BruteForce_Detected_2026}]`\nWhat is the extracted flag?',
+    hint: 'Look closely at the successful authentication log entry bracketed by the attacker IP.',
+    correctFlag: 'CS{BruteForce_Detected_2026}',
+    explanation: 'Security log analysis allows SOC analysts to correlate brute-force attempts and identify when an attacker successfully breached an account.'
+  },
+  {
+    id: 'ctf-3',
+    title: 'Phishing Header Inspection',
+    category: 'Phishing Analysis',
+    difficulty: 'Beginner',
+    points: 20,
+    description: 'Inspect the received email headers to find the malicious sender domain spoofing Microsoft.',
+    prompt: 'A suspicious email header shows:\n`From: support@micros0ft-security-update.com`\nWhat is the exact typo-squatted domain name used in the attacker address?',
+    hint: 'Look at the spelling of microsoft in the sender domain.',
+    correctFlag: 'micros0ft-security-update.com',
+    explanation: 'Attackers frequently replace letters with visually similar numbers or characters (typosquatting) to deceive unsuspecting users.'
+  },
+  {
+    id: 'ctf-4',
+    title: 'MFA & Cryptographic Protocols Quiz',
+    category: 'Security Quiz',
+    difficulty: 'Advanced',
+    points: 50,
+    description: 'Test your advanced knowledge of Zero Trust authentication standards and FIDO2 hardware tokens.',
+    prompt: 'Which authentication standard uses public-key cryptography and is completely immune to phishing attacks even if the user enters credentials on a malicious site? (Enter acronym e.g. FIDO2)',
+    hint: 'It is a W3C web authentication standard often using USB hardware keys or biometrics.',
+    correctFlag: 'FIDO2',
+    explanation: 'FIDO2 / WebAuthn binds cryptographic credentials to the specific origin domain, making phishing attacks impossible because the malicious site cannot forge the origin signature.'
+  }
 ];
