@@ -53,6 +53,42 @@ export interface SecurityEvent {
   details: string;
 }
 
+export interface CtfTask {
+  id: string;
+  stageId: number;
+  title: string;
+  category: 'Cryptography' | 'Log Forensics' | 'Network Analysis' | 'Web Security' | 'Reverse Engineering' | 'OSINT' | 'Cloud Security' | 'Malware Analysis';
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  points: number;
+  description: string;
+  prompt: string;
+  hint: string;
+  characterPersona: {
+    name: string;
+    role: string;
+    avatarPosition: string; // CSS object-position for characters.jpg
+    dialogue: string;
+  };
+  correctFlag: string;
+  explanation: string;
+  isSolved?: boolean;
+  userAnswer?: string;
+  isCorrect?: boolean;
+}
+
+export interface CtfStage {
+  id: number;
+  title: string;
+  subtitle: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  durationSeconds: number; // e.g. 600 seconds
+  tasks: CtfTask[];
+  isCompleted?: boolean;
+  scoreEarned?: number;
+  timeSpent?: number;
+  totalCorrect?: number;
+}
+
 export interface CtfChallenge {
   id: string;
   title: string;
